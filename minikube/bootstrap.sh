@@ -66,6 +66,25 @@ installHyperkitDriver() {
   fi
 }
 
+# checkDashboardIsDeployed checks if Kubernetes Dashboard is deployed
+# into Minikube.
+checkDashboardIsDeployed() {
+  kubectl --context=minikube --namespace=kube-system get pods \
+    | grep kubernetes-dashboard | grep Running > /dev/null
+}
+
+# waitDashboardIsDeployed waits until Kubernetes Dashboard is deployed
+# into Minikube.
+waitDashboardIsDeployed() {
+  set +e
+  checkDashboardIsDeployed
+  while [ "$?" != "0" ]; do
+    sleep 1
+    checkDashboardIsDeployed
+  done
+  set -e
+}
+
 
 
 
@@ -99,11 +118,12 @@ minikube start --bootstrapper=$MINIKUBE_BOOTSTRAPPER \
                --vm-driver=$MINIKUBE_VM_DRIVER \
                --disk-size=10g
 
-(minikube addons list | grep ingress | grep enabled) || \
+(minikube addons list | grep 'ingress' | grep 'enabled') || \
 minikube addons enable ingress
 
 eval $(minikube docker-env)
 
-sleep 10
+helm init --kube-context=minikube
 
+waitDashboardIsDeployed
 minikube dashboard
