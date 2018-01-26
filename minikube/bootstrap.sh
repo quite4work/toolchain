@@ -23,6 +23,21 @@
 # SOFTWARE.
 
 
+# initArch discovers the architecture for this system.
+initArch() {
+  ARCH=$(uname -m)
+  case $ARCH in
+    armv5*) ARCH="armv5";;
+    armv6*) ARCH="armv6";;
+    armv7*) ARCH="armv7";;
+    aarch64) ARCH="arm64";;
+    x86) ARCH="386";;
+    x86_64) ARCH="amd64";;
+    i686) ARCH="386";;
+    i386) ARCH="386";;
+  esac
+}
+
 # initOS discovers the operating system for this system.
 initOS() {
   OS=$(echo `uname` | tr '[:upper:]' '[:lower:]')
@@ -41,16 +56,32 @@ runAsRoot() {
   $CMD
 }
 
+# runIfNot runs the given command (all except 1st arg)
+# if condition (1st arg) fails.
+runIfNot() {
+  (eval "$1" >/dev/null 2>&1) || runCmd ${@:2}
+}
+
+# runCmd prints the given command and runs it.
+runCmd() {
+  (set -x; $@)
+}
+
 # upgradeHomebrewPackages upgrades required Homebrew packages to latest version.
 upgradeHomebrewPackages() {
-  brew update
-  brew tap caskroom/cask
-  brew cask outdated minikube || brew cask reinstall minikube
+  runCmd \
+    brew update
+  runIfNot "brew tap | grep 'caskroom/cask'" \
+    brew tap caskroom/cask
+  runIfNot "brew cask outdated minikube" \
+    brew cask reinstall minikube
   for pkg in kubernetes-cli kubernetes-helm; do
     if [ ! $(brew list | grep $pkg) ]; then
-      brew install $pkg
+      runCmd \
+        brew install $pkg
     else
-      brew outdated $pkg || brew upgrade $pkg --cleanup
+      runIfNot "brew outdated $pkg" \
+        brew upgrade $pkg --cleanup
     fi
   done
 }
@@ -70,7 +101,7 @@ installHyperkitDriver() {
 # into Minikube.
 checkDashboardIsDeployed() {
   kubectl --context=minikube --namespace=kube-system get pods \
-    | grep kubernetes-dashboard | grep Running > /dev/null
+    | grep kubernetes-dashboard | grep Running >/dev/null 2>&1
 }
 
 # waitDashboardIsDeployed waits until Kubernetes Dashboard is deployed
@@ -78,7 +109,7 @@ checkDashboardIsDeployed() {
 waitDashboardIsDeployed() {
   set +e
   checkDashboardIsDeployed
-  while [ "$?" != "0" ]; do
+  while [ $? -ne 0 ]; do
     sleep 1
     checkDashboardIsDeployed
   done
@@ -86,44 +117,45 @@ waitDashboardIsDeployed() {
 }
 
 
-
+# Execution
 
 set -e
-initOS
 
+initArch
+initOS
 
 MINIKUBE_K8S_VER=v1.9.2
 MINIKUBE_BOOTSTRAPPER=kubeadm
 MINIKUBE_VM_DRIVER=virtualbox
-
 case "$OS" in
-darwin)
-  # TODO: Hyperkit driver is still not stable enough. Use with later releases.
-  #MINIKUBE_VM_DRIVER=hyperkit
-  ;;
+  darwin)
+    # TODO: Hyperkit driver is still not stable enough. Use with later releases.
+    #MINIKUBE_VM_DRIVER=hyperkit
+    ;;
 esac
 
-
 case "$OS" in
-darwin)
-  upgradeHomebrewPackages
-  # TODO: Hyperkit driver is still not stable enough. Use with later releases.
-  #installHyperkitDriver
-  ;;
+  darwin)
+    upgradeHomebrewPackages
+    # TODO: Hyperkit driver is still not stable enough. Use with later releases.
+    #installHyperkitDriver
+    ;;
 esac
 
-(minikube status | grep 'minikube:' | grep 'Running') || \
-minikube start --bootstrapper=$MINIKUBE_BOOTSTRAPPER \
-               --kubernetes-version=$MINIKUBE_K8S_VER \
-               --vm-driver=$MINIKUBE_VM_DRIVER \
-               --disk-size=10g
+runIfNot "minikube status | grep 'minikube:' | grep 'Running'" \
+  minikube start --bootstrapper=$MINIKUBE_BOOTSTRAPPER \
+                 --kubernetes-version=$MINIKUBE_K8S_VER \
+                 --vm-driver=$MINIKUBE_VM_DRIVER \
+                 --disk-size=10g
 
-(minikube addons list | grep 'ingress' | grep 'enabled') || \
-minikube addons enable ingress
+runIfNot "minikube addons list | grep 'ingress' | grep 'enabled'" \
+  minikube addons enable ingress
 
-eval $(minikube docker-env)
-
-helm init --kube-context=minikube
+runCmd \
+  helm init --kube-context=minikube
 
 waitDashboardIsDeployed
-minikube dashboard
+runCmd \
+  minikube dashboard
+
+eval $(minikube docker-env)
