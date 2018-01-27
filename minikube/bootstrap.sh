@@ -73,7 +73,7 @@ upgradeHomebrewPackages() {
     brew update
   runIfNot "brew tap | grep 'caskroom/cask'" \
     brew tap caskroom/cask
-  runIfNot "brew cask outdated minikube" \
+  runIfNot "brew cask outdated minikube | test -z" \
     brew cask reinstall minikube
   for pkg in kubernetes-cli kubernetes-helm; do
     if [ ! $(brew list | grep $pkg) ]; then
