@@ -157,5 +157,3 @@ runCmd \
 waitDashboardIsDeployed
 runCmd \
   minikube dashboard
-
-eval $(minikube docker-env)
