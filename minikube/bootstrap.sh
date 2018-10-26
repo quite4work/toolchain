@@ -129,7 +129,7 @@ set -e
 initArch
 initOS
 
-MINIKUBE_K8S_VER=v1.9.2
+MINIKUBE_K8S_VER=v1.11.4
 MINIKUBE_BOOTSTRAPPER=kubeadm
 MINIKUBE_VM_DRIVER=virtualbox
 case "$OS" in
