@@ -67,6 +67,15 @@ runCmd() {
   (set -x; $@)
 }
 
+# getGitHubLatestRelease gets the latest release from GitHub releases page.
+# Example:
+#   getGitHubLatestRelease "helm/helm"
+getGitHubLatestRelease() {
+  curl -sfL "https://api.github.com/repos/$1/releases/latest" \
+    | grep '"tag_name":' \
+    | sed -E 's/.*"([^"]+)".*/\1/'
+}
+
 # upgradeHomebrewPackages upgrades required Homebrew packages to latest version.
 upgradeHomebrewPackages() {
   runCmd \
@@ -89,6 +98,76 @@ upgradeHomebrewPackages() {
         brew upgrade $pkg --cleanup
     fi
   done
+}
+
+# upgradeChocoPackages upgrades required Chocolatey packages to latest version.
+upgradeChocoPackages() {
+  for pkg in kubernetes-cli kubernetes-helm minikube; do
+    if [ ! "$(choco list --local-only | grep $pkg)" ]; then
+      runCmd \
+        choco install -y $pkg
+    elif [ "$(choco outdated | grep $pkg)" ]; then
+      runCmd \
+        choco upgrade -y $pkg
+    fi
+  done
+}
+
+# upgradeRawBinaries upgrades required binaries to latest version.
+upgradeRawBinaries() {
+  if [ -z $(which helm) ]; then
+    installHelmBinary
+  else
+    local HELM_LAST_VER=$(getGitHubLatestRelease "helm/helm")
+    local HELM_CURR_VER=$(helm version --client --short | tr "+" " " \
+                                                        | cut -f 2 -d " ")
+    if [ "$HELM_CURR_VER" != "$HELM_LAST_VER" ]; then
+      installHelmBinary
+    fi
+  fi
+  if [ -z $(which kubectl) ]; then
+    installKubectlBinary
+  else
+    local KUBECTL_LAST_VER=$(curl -s \
+           https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+    local KUBECTL_CURR_VER=$(kubectl version --client --short | cut -f 3 -d " ")
+    if [ "$KUBECTL_CURR_VER" != "$KUBECTL_LAST_VER" ]; then
+      installKubectlBinary
+    fi
+  fi
+  if [ -z $(which minikube) ]; then
+    installMinikubeBinary
+  else
+    local MINIKUBE_LAST_VER=$(getGitHubLatestRelease "kubernetes/minikube")
+    local MINIMUBE_CURR_VER=$(minikube version | cut -f 3 -d " ")
+    if [ "$MINIMUBE_CURR_VER" != "$MINIKUBE_LAST_VER" ]; then
+      installMinikubeBinary
+    fi
+  fi
+}
+
+# installHelmBinary upgrade binary helm package
+installHelmBinary() {
+  runAsRoot \
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+}
+
+# installHelmBinary upgrade binary kubectl package
+installKubectlBinary() {
+  local VER=$(curl -s \
+    https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+  runCmd \
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/${VER}/bin/${OS}/${ARCH}/kubectl
+  runAsRoot install kubectl /usr/local/bin/kubectl
+  rm -f kubectl
+}
+
+# installHelmBinary upgrade binary minikube package
+installMinikubeBinary() {
+  runCmd \
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-${OS}-${ARCH}
+  runAsRoot install minikube-${OS}-${ARCH} /usr/local/bin/minikube
+  rm -f minikube-${OS}-${ARCH}
 }
 
 # installHyperkitDriver installs Hyperkit VM driver if it's not installed yet.
@@ -144,6 +223,12 @@ case "$OS" in
     upgradeHomebrewPackages
     # TODO: Hyperkit driver is still not stable enough. Use with later releases.
     #installHyperkitDriver
+    ;;
+  windows)
+    upgradeChocoPackages
+    ;;
+  linux)
+    upgradeRawBinaries
     ;;
 esac
 
