@@ -95,7 +95,7 @@ upgradeHomebrewPackages() {
         brew install $pkg
     else
       runIfNot "brew outdated $pkg" \
-        brew upgrade $pkg --cleanup
+        brew upgrade $pkg
     fi
   done
 }
