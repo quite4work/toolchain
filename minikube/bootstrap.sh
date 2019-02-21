@@ -208,21 +208,23 @@ set -e
 initArch
 initOS
 
-MINIKUBE_K8S_VER=v1.12.3
-MINIKUBE_BOOTSTRAPPER=kubeadm
-MINIKUBE_VM_DRIVER=virtualbox
-case "$OS" in
-  darwin)
-    # TODO: Hyperkit driver is still not stable enough. Use with later releases.
-    #MINIKUBE_VM_DRIVER=hyperkit
-    ;;
-esac
+MINIKUBE_K8S_VER=v${MINIKUBE_K8S_VER:-1.13.3}
+MINIKUBE_BOOTSTRAPPER=${MINIKUBE_BOOTSTRAPPER:-kubeadm}
+if [ -z "$MINIKUBE_VM_DRIVER" ]; then
+  MINIKUBE_VM_DRIVER=virtualbox  
+  case "$OS" in
+    darwin)
+      MINIKUBE_VM_DRIVER=hyperkit
+      ;;
+  esac
+fi
 
 case "$OS" in
   darwin)
     upgradeHomebrewPackages
-    # TODO: Hyperkit driver is still not stable enough. Use with later releases.
-    #installHyperkitDriver
+    if [ "$MINIKUBE_VM_DRIVER" == "hyperkit" ]; then
+      installHyperkitDriver
+    fi
     ;;
   windows)
     upgradeChocoPackages
