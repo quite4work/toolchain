@@ -40,6 +40,8 @@ RUSTUP_DEFAULT_HOST_TRIPLE=$(cat $RUSTUP_HOME/settings.toml \
 set -x
 
 rustup install nightly-$RUSTUP_NIGHTLY_DATE
+rustup component add rustfmt --toolchain nightly-$RUSTUP_NIGHTLY_DATE
+rustup component add clippy --toolchain nightly-$RUSTUP_NIGHTLY_DATE
 ln -snf ~/.rustup/toolchains/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
        ~/.rustup/toolchains/nightly-$RUSTUP_DEFAULT_HOST_TRIPLE
 ln -snf ~/.rustup/update-hashes/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
