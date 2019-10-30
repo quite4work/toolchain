@@ -80,16 +80,7 @@ getGitHubLatestRelease() {
 upgradeHomebrewPackages() {
   runCmd \
     brew update
-  runIfNot "brew tap | grep 'caskroom/cask'" \
-    brew tap caskroom/cask
-  if [ ! $(brew cask list -1 | grep minikube) ]; then
-    runCmd \
-      brew cask install minikube
-  else
-    runIfNot "brew cask outdated minikube | test -z" \
-      brew cask reinstall minikube
-  fi
-  for pkg in kubernetes-cli kubernetes-helm; do
+  for pkg in kubernetes-cli kubernetes-helm minikube; do
     if [ ! $(brew list -1 | grep $pkg) ]; then
       runCmd \
         brew install $pkg
