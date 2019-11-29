@@ -72,15 +72,15 @@ runCmd() {
 #   getGitHubLatestRelease "helm/helm"
 getGitHubLatestRelease() {
   curl -sfL "https://api.github.com/repos/$1/releases/latest" \
-    | grep '"tag_name":' \
-    | sed -E 's/.*"([^"]+)".*/\1/'
+    | grep -m1 '"tag_name":' \
+    | cut -d '"' -f4
 }
 
 # upgradeHomebrewPackages upgrades required Homebrew packages to latest version.
 upgradeHomebrewPackages() {
   runCmd \
     brew update
-  for pkg in kubernetes-cli kubernetes-helm minikube; do
+  for pkg in kubernetes-cli helm minikube; do
     if [ ! $(brew list -1 | grep $pkg) ]; then
       runCmd \
         brew install $pkg
@@ -110,8 +110,8 @@ upgradeRawBinaries() {
     installHelmBinary
   else
     local HELM_LAST_VER=$(getGitHubLatestRelease "helm/helm")
-    local HELM_CURR_VER=$(helm version --client --short | tr "+" " " \
-                                                        | cut -f 2 -d " ")
+    local HELM_CURR_VER=v$(helm version --client --short | cut -d '+' -f1 \
+                                                         | cut -d 'v' -f2)
     if [ "$HELM_CURR_VER" != "$HELM_LAST_VER" ]; then
       installHelmBinary
     fi
@@ -140,7 +140,8 @@ upgradeRawBinaries() {
 # installHelmBinary upgrade binary helm package
 installHelmBinary() {
   runAsRoot \
-    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+    | bash
 }
 
 # installHelmBinary upgrade binary kubectl package
@@ -238,9 +239,6 @@ runIfNot "minikube status | grep 'minikube:' | grep 'Running'" \
 
 runIfNot "minikube addons list | grep 'ingress' | grep 'enabled'" \
   minikube addons enable ingress
-
-runCmd \
-  helm init --kube-context=minikube
 
 waitDashboardIsDeployed
 runCmd \
