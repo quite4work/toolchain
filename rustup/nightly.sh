@@ -23,26 +23,39 @@
 # SOFTWARE.
 
 
-set -e
+# runCmd prints the given command and runs it.
+runCmd() {
+  (set -x; $@)
+}
 
+
+# Execution
+
+set -e
 
 if [[ -z "$RUSTUP_NIGHTLY_DATE" ]]; then
   echo 'Error: RUSTUP_NIGHTLY_DATE must be specified'
   exit 1
 fi
+
+if [[ "$RUSTUP_FORCE" == 'yes' ]]; then
+  RUSTUP_FORCE='--force'
+else
+  RUSTUP_FORCE=''
+fi
+
 RUSTUP_HOME=${RUSTUP_HOME:-~/.rustup}
 RUSTUP_DEFAULT_HOST_TRIPLE=$(cat $RUSTUP_HOME/settings.toml \
                              | grep default_host_triple \
                              | cut -d'"' -f2 \
                              | tr -d '\n')
 
-
-set -x
-
-rustup install nightly-$RUSTUP_NIGHTLY_DATE
-rustup component add rustfmt --toolchain nightly-$RUSTUP_NIGHTLY_DATE
-rustup component add clippy --toolchain nightly-$RUSTUP_NIGHTLY_DATE
-ln -snf ~/.rustup/toolchains/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
+runCmd rustup install nightly-$RUSTUP_NIGHTLY_DATE $RUSTUP_FORCE
+if [[ -z "$RUSTUP_FORCE" ]]; then
+  runCmd rustup component add rustfmt --toolchain nightly-$RUSTUP_NIGHTLY_DATE
+  runCmd rustup component add clippy --toolchain nightly-$RUSTUP_NIGHTLY_DATE
+fi
+runCmd ln -snf ~/.rustup/toolchains/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
        ~/.rustup/toolchains/nightly-$RUSTUP_DEFAULT_HOST_TRIPLE
-ln -snf ~/.rustup/update-hashes/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
+runCmd ln -snf ~/.rustup/update-hashes/nightly-$RUSTUP_NIGHTLY_DATE-$RUSTUP_DEFAULT_HOST_TRIPLE \
        ~/.rustup/update-hashes/nightly-$RUSTUP_DEFAULT_HOST_TRIPLE
