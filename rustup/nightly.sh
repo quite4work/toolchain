@@ -44,11 +44,10 @@ else
   RUSTUP_FORCE=''
 fi
 
-RUSTUP_HOME=${RUSTUP_HOME:-~/.rustup}
-RUSTUP_DEFAULT_HOST_TRIPLE=$(cat $RUSTUP_HOME/settings.toml \
-                             | grep default_host_triple \
-                             | cut -d'"' -f2 \
-                             | tr -d '\n')
+RUSTUP_DEFAULT_HOST_TRIPLE=$(rustup show \
+                             | grep 'Default host: ' \
+                             | cut -d':' -f2 \
+                             | tr -d ' \n')
 
 runCmd rustup install nightly-$RUSTUP_NIGHTLY_DATE $RUSTUP_FORCE
 if [[ -z "$RUSTUP_FORCE" ]]; then
