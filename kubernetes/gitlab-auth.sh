@@ -49,12 +49,23 @@ genGitlabToken() {
   # 1. Sign in into GitLab via username and password.
   local htmlContent=$(curl -c "$COOKIES_FILE" -i "$GITLAB_URL/users/sign_in" -s)
   local csrfToken=$(echo $htmlContent \
-    | sed 's/.*<form class="new_user[^<]*\(<[^<]*\)\{2\}authenticity_token" value="\([^ ]*\)".*/\2/' \
-    | sed -n 1p)
-  curl -b "$COOKIES_FILE" -c "$COOKIES_FILE" -s --output /dev/null \
+    | sed -n 's/.*<form class="new_user[^<]*\(<[^<]*\)\{1\}authenticity_token" value="\([^"]*\)".*/\2/p')
+  local htmlContent=$(curl -b "$COOKIES_FILE" -c "$COOKIES_FILE" -s \
     -i "$GITLAB_URL/users/sign_in" \
     --data "user[login]=$GITLAB_USER&user[password]=$GITLAB_PASS" \
-    --data-urlencode "authenticity_token=$csrfToken"
+    --data-urlencode "authenticity_token=$csrfToken")
+  # Check whether 2FA code is required.
+  local csrfToken=$(echo $htmlContent \
+    | sed -n 's/.*<form class="edit_user[^<]*\(<[^<]*\)\{1\}authenticity_token" value="\([^"]*\)".*/\2/p')
+  if [[ $csrfToken != "" ]]; then
+    # Ask user for 2FA code.
+    read -p "2FA code: " GITLAB_2FA_CODE </dev/tty
+    # Finish signing in using the prompted 2FA code.
+    curl -b "$COOKIES_FILE" -c "$COOKIES_FILE" -s \
+      -i "$GITLAB_URL/users/sign_in" \
+      --data "user[otp_attempt]=$GITLAB_2FA_CODE" \
+      --data-urlencode "authenticity_token=$csrfToken" >/dev/null
+  fi
   if [[ "$(cat $COOKIES_FILE | grep _gitlab_session \
                             | awk '{print $5}')" != "0" ]]; then
     echo "Invalid username or password"
