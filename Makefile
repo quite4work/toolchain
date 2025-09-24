@@ -19,6 +19,8 @@ MAINLINE_BRANCH := master
 CURRENT_BRANCH := $(shell git branch | grep \* | cut -d ' ' -f2)
 
 # Extract versions from Dockerfile
+IMAGE_VER ?= $(strip \
+	$(shell grep 'ARG image_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 ANSIBLE_VER ?= $(strip \
 	$(shell grep 'ARG ansible_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 BIOME_VER ?= $(strip \
@@ -42,6 +44,7 @@ TERRAFORM_VER ?= $(strip \
 BUTANE_VER ?= $(strip \
 	$(shell grep 'ARG butane_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 
+NODE_VER ?= latest
 NAME := toolchain-container
 OWNER := $(or $(GITHUB_REPOSITORY_OWNER),instrumentisto)
 REGISTRIES := $(strip $(subst $(comma), ,\
@@ -317,7 +320,7 @@ git.release:
 ifeq ($(shell git rev-parse $(git-release-tag) >/dev/null 2>&1 && echo "ok"),ok)
 	$(error "Git tag $(git-release-tag) already exists")
 endif
-	git tag $(git-release-tag) main
+	git tag $(git-release-tag) $(MAINLINE_BRANCH)
 	git push origin refs/tags/$(git-release-tag)
 
 
@@ -327,7 +330,7 @@ endif
 # .PHONY section #
 ##################
 
-.PHONY: image manifest push release test \
+.PHONY: image manifest push release squash tags test \
         docker.image docker.manifest docker.push docker.tags docker.tar \
         docker.test test.docker docker.untar \
-        git.release git.squash
+        git.release git.squash npm.install
