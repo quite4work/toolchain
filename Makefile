@@ -8,6 +8,14 @@ comma := ,
 eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
                                 $(findstring $(2),$(1))),1)
 
+# Maps platform identifier to the one accepted by Docker CLI.
+dockerify = $(strip $(if $(call eq,$(1),linux/arm32v6),linux/arm/v6,\
+                    $(if $(call eq,$(1),linux/arm32v7),linux/arm/v7,\
+                    $(if $(call eq,$(1),linux/arm64v8),linux/arm64/v8,\
+                    $(if $(call eq,$(1),linux/i386),   linux/386,\
+                                                       $(platform))))))
+
+
 
 
 
@@ -107,7 +115,8 @@ docker-tags = $(strip $(or $(subst $(comma), ,$(tags)),$(TAGS)))
 github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
 github_repo := $(strip $(or $(GITHUB_REPOSITORY),$(OWNER)/$(NAME)))
 docker.image:
-	docker build --network=host --force-rm \
+	docker build --force-rm \
+		$(if $(call eq,$(platform),),,--platform $(call dockerify,$(platform)))\
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg image_ver=$(IMAGE_VER) \
 		--build-arg ansible_ver=$(ANSIBLE_VER) \
