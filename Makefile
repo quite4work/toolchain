@@ -256,6 +256,27 @@ endif
 
 
 ################
+# NPM commands #
+################
+
+# Resolve project NPM dependencies.
+#
+# Usage:
+#	make npm.install [dockerized=(no|yes)]
+
+npm.install:
+ifeq ($(dockerized),yes)
+	docker run --rm --network=host -v "$(PWD)":/app/ -w /app/ \
+		node:$(NODE_VER) \
+			make npm.install dockerized=no
+else
+	npm install
+endif
+
+
+
+
+################
 # Git commands #
 ################
 
