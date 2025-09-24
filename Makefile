@@ -61,6 +61,18 @@ VERSION ?= $(word 1,$(subst $(comma), ,$(TAGS)))
 
 squash: git.squash
 
+image: docker.image
+
+manifest: docker.manifest
+
+push: docker.push
+
+release: git.release
+
+tags: docker.tags
+
+test: test.docker
+
 
 
 
@@ -112,6 +124,43 @@ docker.image:
 		--label org.opencontainers.image.version=$(strip \
 			$(shell git describe --tags --dirty)) \
 		-t $(OWNER)/$(NAME):$(or $(tag),$(VERSION)) ./
+
+
+# Unite multiple single-platform Docker images as a multi-platform Docker image.
+#
+# WARNING: All the single-platform Docker images should be present on their
+#          remote registry. This is the limitation imposed by `docker manifest`
+#          command.
+#
+#	make docker.manifest [amend=(yes|no)] [push=(no|yes)]
+#	                     [of=($(VERSION)|<docker-tag-1>[,<docker-tag-2>...])]
+#	                     [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
+#	                     [registries=($(REGISTRIES)|<prefix-1>[,<prefix-2>...])]
+
+docker.manifest:
+	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
+		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
+			$(call docker.manifest.create.do,$(or $(of),$(VERSION)),\
+			                                 $(registry),$(tag))))
+ifeq ($(push),yes)
+	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
+		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
+			$(call docker.manifest.push.do,$(registry),$(tag))))
+endif
+define docker.manifest.create.do
+	$(eval froms := $(strip $(1)))
+	$(eval repo := $(strip $(2)))
+	$(eval tag := $(strip $(3)))
+	docker manifest create $(if $(call eq,$(amend),no),,--amend) \
+		$(repo)/$(OWNER)/$(NAME):$(tag) \
+		$(foreach from,$(subst $(comma), ,$(froms)),\
+			$(repo)/$(OWNER)/$(NAME):$(from))
+endef
+define docker.manifest.push.do
+	$(eval repo := $(strip $(1)))
+	$(eval tag := $(strip $(2)))
+	docker manifest push $(repo)/$(OWNER)/$(NAME):$(tag)
+endef
 
 
 # Manually push Docker images to container registries.
@@ -179,6 +228,33 @@ docker.untar:
 
 
 
+####################
+# Testing commands #
+####################
+
+# Run Bats tests for Docker image.
+#
+# Documentation of Bats:
+#	https://github.com/bats-core/bats-core
+#
+# Usage:
+#	make test.docker [tag=($(VERSION)|<docker-tag>)]
+#	                 [platform=(linux/amd64|<os>/<arch>)]
+
+test.docker:
+ifeq ($(wildcard node_modules/.bin/bats),)
+	@make npm.install
+endif
+	IMAGE=$(OWNER)/$(NAME):$(or $(tag),$(VERSION)) \
+	PLATFORM=$(or $(call dockerify,$(platform)),linux/amd64) \
+	node_modules/.bin/bats \
+		--timing $(if $(call eq,$(CI),),--pretty,--formatter tap) \
+		--print-output-on-failure \
+		tests/main.bats
+
+
+
+
 ################
 # Git commands #
 ################
@@ -209,12 +285,28 @@ ifeq ($(del),yes)
 endif
 
 
+# Release project version (apply version tag and push).
+#
+# Usage:
+#	make git.release [ver=($(VERSION)|<proj-ver>)]
+
+git-release-tag = $(strip $(or $(ver),$(VERSION)))
+
+git.release:
+ifeq ($(shell git rev-parse $(git-release-tag) >/dev/null 2>&1 && echo "ok"),ok)
+	$(error "Git tag $(git-release-tag) already exists")
+endif
+	git tag $(git-release-tag) main
+	git push origin refs/tags/$(git-release-tag)
+
+
 
 
 ##################
 # .PHONY section #
 ##################
 
-.PHONY: squash \
-        docker.image docker.push docker.tags docker.tar docker.untar \
-        git.squash
+.PHONY: image manifest push release test \
+        docker.image docker.manifest docker.push docker.tags docker.tar \
+        docker.test test.docker docker.untar \
+        git.release git.squash
