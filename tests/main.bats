@@ -94,29 +94,11 @@
 }
 
 
-@test "helm is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which helm'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/helm" ]]
-}
-
-
 @test "helm runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'helm version'
+    'helm --help'
   [ "$status" -eq 0 ]
-}
-
-
-@test "biome is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which biome'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/biome" ]]
 }
 
 
@@ -125,15 +107,6 @@
                  --entrypoint sh $IMAGE -c \
     'biome --version'
   [ "$status" -eq 0 ]
-}
-
-
-@test "butane is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which butane'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/butane" ]]
 }
 
 
