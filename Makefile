@@ -1,3 +1,16 @@
+###################################
+# Common defaults/definitions #
+###############################
+
+comma := ,
+
+# Checks two given strings for equality.
+eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
+                                $(findstring $(2),$(1))),1)
+
+
+
+
 ######################
 # Project parameters #
 ######################
@@ -5,29 +18,36 @@
 MAINLINE_BRANCH := master
 CURRENT_BRANCH := $(shell git branch | grep \* | cut -d ' ' -f2)
 
-IMAGE_VER ?= $(strip \
-	$(shell grep 'ARG image_ver=' Dockerfile | cut -d '=' -f2))
-DOCKER_VER ?= $(strip \
-	$(shell grep 'ARG docker_ver=' Dockerfile | cut -d '=' -f2))
-DOCKER_COMPOSE_VER ?= $(strip \
-	$(shell grep 'ARG docker_compose_ver=' Dockerfile | cut -d '=' -f2))
-KUBECTL_VER ?= $(strip \
-	$(shell grep 'ARG kubectl_ver=' Dockerfile | cut -d '=' -f2))
+# Extract versions from Dockerfile
+ANSIBLE_VER ?= $(strip \
+	$(shell grep 'ARG ansible_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+BIOME_VER ?= $(strip \
+	$(shell grep 'ARG biome_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+DENO_VER ?= $(strip \
+	$(shell grep 'ARG deno_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+DOCTL_VER ?= $(strip \
+	$(shell grep 'ARG doctl_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+HCLOUD_VER ?= $(strip \
+	$(shell grep 'ARG hcloud_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 HELM_VER ?= $(strip \
-	$(shell grep 'ARG helm_ver=' Dockerfile | cut -d '=' -f2))
-REG_VER ?= $(strip \
-	$(shell grep 'ARG reg_ver=' Dockerfile | cut -d '=' -f2))
-GITLAB_RELEASE_CLI_VER ?= $(strip \
-	$(shell grep 'ARG gitlab_release_cli_ver=' Dockerfile | head -1 \
-	                                                      | cut -d '=' -f2))
+	$(shell grep 'ARG helm_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+JSONNET_BUNDLER_VER ?= $(strip \
+	$(shell grep 'ARG jsonnet_bundler_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+JSONNET_VER ?= $(strip \
+	$(shell grep 'ARG jsonnet_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+KUBECTL_VER ?= $(strip \
+	$(shell grep 'ARG kubectl_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+TERRAFORM_VER ?= $(strip \
+	$(shell grep 'ARG terraform_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+BUTANE_VER ?= $(strip \
+	$(shell grep 'ARG butane_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 
-NAME := gitlab-builder
+NAME := toolchain-container
 OWNER := $(or $(GITHUB_REPOSITORY_OWNER),instrumentisto)
 REGISTRIES := $(strip $(subst $(comma), ,\
 	$(shell grep -m1 'registry: \["' .github/workflows/ci.yml \
 	        | cut -d':' -f2 | tr -d '"][')))
-TAGS ?= $(IMAGE_VER)-docker$(DOCKER_VER)-compose$(DOCKER_COMPOSE_VER)-kubectl$(KUBECTL_VER)-helm$(HELM_VER)-reg$(REG_VER)-releasecli$(GITLAB_RELEASE_CLI_VER) \
-        $(IMAGE_VER) \
+TAGS ?= $(IMAGE_VER) \
         $(strip $(shell echo $(IMAGE_VER) | cut -d '.' -f1,2)) \
         latest
 VERSION ?= $(word 1,$(subst $(comma), ,$(TAGS)))
@@ -56,28 +76,36 @@ docker-tags = $(strip $(or $(subst $(comma), ,$(tags)),$(TAGS)))
 # Build Docker image with the given tag.
 #
 # Usage:
-#	make docker.image [tag=($(VERSION)|<docker-tag>)]] [no-cache=(no|yes)]
+#	make docker.image [tag=($(VERSION)|<docker-tag>)] [no-cache=(no|yes)]
 #	                  [IMAGE_VER=<image-version>]
-#	                  [DOCKER_VER=<docker-version>]
-#	                  [DOCKER_COMPOSE_VER=<docker-compose-version>]
+#	                  [ANSIBLE_VER=<ansible-version>]
 #	                  [KUBECTL_VER=<kubectl-version>]
+#	                  [BIOME_VER=<biome-version>]
+#	                  [DENO_VER=<deno-version>]
+#	                  [DOCTL_VER=<doctl-version>]
+#	                  [HCLOUD_VER=<hcloud-version>]
 #	                  [HELM_VER=<helm-version>]
-#	                  [REG_VER=<reg-version>]
-#	                  [GITLAB_RELEASE_CLI_VER=<gitlab-release-cli-version>]
-
+#	                  [JSONNET_BUNDLER_VER=<jsonnet-bundler-version>]
+#	                  [JSONNET_VER=<jsonnet-version>]
+#	                  [TERRAFORM_VER=<terraform-version>]
+#	                  [BUTANE_VER=<butane-version>]
 github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
-github_repo := $(strip $(or $(GITHUB_REPOSITORY),$(OWNER)/$(NAME)-docker-image))
-
+github_repo := $(strip $(or $(GITHUB_REPOSITORY),$(OWNER)/$(NAME)))
 docker.image:
 	docker build --network=host --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg image_ver=$(IMAGE_VER) \
-		--build-arg docker_ver=$(DOCKER_VER) \
-		--build-arg docker_compose_ver=$(DOCKER_COMPOSE_VER) \
+		--build-arg ansible_ver=$(ANSIBLE_VER) \
 		--build-arg kubectl_ver=$(KUBECTL_VER) \
+		--build-arg biome_ver=$(BIOME_VER) \
+		--build-arg deno_ver=$(DENO_VER) \
+		--build-arg doctl_ver=$(DOCTL_VER) \
+		--build-arg hcloud_ver=$(HCLOUD_VER) \
 		--build-arg helm_ver=$(HELM_VER) \
-		--build-arg reg_ver=$(REG_VER) \
-		--build-arg gitlab_release_cli_ver=$(GITLAB_RELEASE_CLI_VER) \
+		--build-arg jsonnet_bundler_ver=$(JSONNET_BUNDLER_VER) \
+		--build-arg jsonnet_ver=$(JSONNET_VER) \
+		--build-arg terraform_ver=$(TERRAFORM_VER) \
+		--build-arg butane_ver=$(BUTANE_VER) \
 		--label org.opencontainers.image.source=$(github_url)/$(github_repo) \
 		--label org.opencontainers.image.revision=$(strip \
 			$(shell git show --pretty=format:%H --no-patch)) \
@@ -188,4 +216,5 @@ endif
 ##################
 
 .PHONY: squash \
+        docker.image docker.push docker.tags docker.tar docker.untar \
         git.squash
