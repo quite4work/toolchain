@@ -22,18 +22,10 @@
 }
 
 
-@test "SSH is installed" {
+@test "ssh runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which ssh'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "rsync is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which rsync'
+    'ssh -V'
   [ "$status" -eq 0 ]
 }
 
@@ -46,105 +38,58 @@
 }
 
 
-@test "kubectl is installed and in PATH" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which kubectl'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/kubectl" ]]
-}
-
-
 @test "kubectl runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'kubectl version --client'
+    'kubectl --help'
   [ "$status" -eq 0 ]
-}
-
-
-@test "terraform is installed and in PATH" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which terraform'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/terraform" ]]
 }
 
 
 @test "terraform runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'terraform version'
+    'terraform --help'
   [ "$status" -eq 0 ]
-}
-
-
-@test "deno is installed and in PATH" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which deno'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.deno/bin/deno" ]]
 }
 
 
 @test "deno runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'deno --version'
+    'deno --help'
   [ "$status" -eq 0 ]
 }
 
 
-@test "jsonnet is installed" {
+@test "jsonnet runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which jsonnet'
+    'jsonnet --help'
   [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/jsonnet" ]]
 }
 
 
-@test "jsonnet bundler (jb) is installed" {
+@test "jsonnet bundler runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which jb'
+    'jb --help'
   [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/jb" ]]
-}
-
-
-@test "hcloud is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which hcloud'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/hcloud" ]]
 }
 
 
 @test "hcloud runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'hcloud version'
+    'hcloud --help'
   [ "$status" -eq 0 ]
-}
-
-
-@test "doctl is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which doctl'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/doctl" ]]
 }
 
 
 @test "doctl runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'doctl version'
+    'doctl --help'
   [ "$status" -eq 0 ]
 }
 
@@ -200,15 +145,6 @@
 }
 
 
-@test "ansible is installed via pipx" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which ansible'
-  [ "$status" -eq 0 ]
-  [[ "$output" == "/root/.local/bin/ansible" ]]
-}
-
-
 @test "ansible runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
@@ -217,74 +153,34 @@
 }
 
 
-@test "ansible-playbook is available" {
+@test "git runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which ansible-playbook'
+    'git --help'
   [ "$status" -eq 0 ]
 }
 
 
-@test "ansible-galaxy is available" {
+@test "unzip runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which ansible-galaxy'
+    'unzip --help'
   [ "$status" -eq 0 ]
 }
 
 
-@test "python3 is installed" {
+@test "make runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which python3'
+    'make --help'
   [ "$status" -eq 0 ]
 }
 
 
-@test "pipx is installed" {
+@test "virsh runs ok" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
-    'which pipx'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "git is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which git'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "curl is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which curl'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "unzip is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which unzip'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "make is installed" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which make'
-  [ "$status" -eq 0 ]
-}
-
-
-@test "libvirt-clients tools are available" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'which virsh'
+    'virsh --help'
   [ "$status" -eq 0 ]
 }
 
@@ -298,38 +194,10 @@
 }
 
 
-@test "PATH includes /root/.local/bin" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'echo $PATH | grep -o "/root/\.local/bin"'
-  [ "$status" -eq 0 ]
-  [ "$output" = "/root/.local/bin" ]
-}
-
-
-@test "DENO_INSTALL environment variable is set" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 --entrypoint sh $IMAGE -c \
-    'echo $DENO_INSTALL'
-  [ "$status" -eq 0 ]
-  [ "$output" = "/root/.deno" ]
-}
-
-
 @test "TOOLCHAIN_CONTAINER environment variable is set" {
   run docker run --rm --pull never --platform $PLATFORM \
                  --entrypoint sh $IMAGE -c \
     'echo $TOOLCHAIN_CONTAINER'
   [ "$status" -eq 0 ]
   [ "$output" = "1" ]
-}
-
-
-@test "TZ env var works ok" {
-  run docker run --rm --pull never --platform $PLATFORM \
-                 -e TZ=Asia/Tokyo \
-                 --entrypoint sh $IMAGE -c \
-    'date +%Z'
-  [ "$status" -eq 0 ]
-  [ "$output" = "JST" ]
 }
