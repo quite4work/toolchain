@@ -8,14 +8,6 @@ comma := ,
 eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
                                 $(findstring $(2),$(1))),1)
 
-# Maps platform identifier to the one accepted by Docker CLI.
-dockerify = $(strip $(if $(call eq,$(1),linux/arm32v6),linux/arm/v6,\
-                    $(if $(call eq,$(1),linux/arm32v7),linux/arm/v7,\
-                    $(if $(call eq,$(1),linux/arm64v8),linux/arm64/v8,\
-                    $(if $(call eq,$(1),linux/i386),   linux/386,\
-                                                       $(platform))))))
-
-
 
 
 
@@ -74,8 +66,6 @@ squash: git.squash
 
 image: docker.image
 
-manifest: docker.manifest
-
 push: docker.push
 
 release: git.release
@@ -116,7 +106,6 @@ github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
 github_repo := $(strip $(or $(GITHUB_REPOSITORY),$(OWNER)/$(NAME)))
 docker.image:
 	docker build --force-rm \
-		$(if $(call eq,$(platform),),,--platform $(call dockerify,$(platform)))\
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg image_ver=$(IMAGE_VER) \
 		--build-arg ansible_ver=$(ANSIBLE_VER) \
@@ -136,43 +125,6 @@ docker.image:
 		--label org.opencontainers.image.version=$(strip \
 			$(shell git describe --tags --dirty)) \
 		-t $(OWNER)/$(NAME):$(or $(tag),$(VERSION)) ./
-
-
-# Unite multiple single-platform Docker images as a multi-platform Docker image.
-#
-# WARNING: All the single-platform Docker images should be present on their
-#          remote registry. This is the limitation imposed by `docker manifest`
-#          command.
-#
-#	make docker.manifest [amend=(yes|no)] [push=(no|yes)]
-#	                     [of=($(VERSION)|<docker-tag-1>[,<docker-tag-2>...])]
-#	                     [tags=($(TAGS)|<docker-tag-1>[,<docker-tag-2>...])]
-#	                     [registries=($(REGISTRIES)|<prefix-1>[,<prefix-2>...])]
-
-docker.manifest:
-	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
-		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
-			$(call docker.manifest.create.do,$(or $(of),$(VERSION)),\
-			                                 $(registry),$(tag))))
-ifeq ($(push),yes)
-	$(foreach tag,$(subst $(comma), ,$(docker-tags)),\
-		$(foreach registry,$(subst $(comma), ,$(docker-registries)),\
-			$(call docker.manifest.push.do,$(registry),$(tag))))
-endif
-define docker.manifest.create.do
-	$(eval froms := $(strip $(1)))
-	$(eval repo := $(strip $(2)))
-	$(eval tag := $(strip $(3)))
-	docker manifest create $(if $(call eq,$(amend),no),,--amend) \
-		$(repo)/$(OWNER)/$(NAME):$(tag) \
-		$(foreach from,$(subst $(comma), ,$(froms)),\
-			$(repo)/$(OWNER)/$(NAME):$(from))
-endef
-define docker.manifest.push.do
-	$(eval repo := $(strip $(1)))
-	$(eval tag := $(strip $(2)))
-	docker manifest push $(repo)/$(OWNER)/$(NAME):$(tag)
-endef
 
 
 # Manually push Docker images to container registries.
@@ -251,14 +203,12 @@ docker.untar:
 #
 # Usage:
 #	make test.docker [tag=($(VERSION)|<docker-tag>)]
-#	                 [platform=(linux/amd64|<os>/<arch>)]
 
 test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
 	@make npm.install
 endif
 	IMAGE=$(OWNER)/$(NAME):$(or $(tag),$(VERSION)) \
-	PLATFORM=$(or $(call dockerify,$(platform)),linux/amd64) \
 	node_modules/.bin/bats \
 		--timing $(if $(call eq,$(CI),),--pretty,--formatter tap) \
 		--print-output-on-failure \
@@ -339,7 +289,7 @@ endif
 # .PHONY section #
 ##################
 
-.PHONY: image manifest push release squash tags test \
-        docker.image docker.manifest docker.push docker.tags docker.tar \
+.PHONY: image push release squash tags test \
+        docker.image docker.push docker.tags docker.tar \
         docker.test test.docker docker.untar \
         git.release git.squash npm.install
