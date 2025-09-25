@@ -290,6 +290,6 @@ endif
 ##################
 
 .PHONY: image push release squash tags test \
-        docker.image docker.push docker.tags docker.tar \
-        docker.test test.docker docker.untar \
+        docker.image docker.push docker.tags docker.tar docker.untar \
+        docker.test test.docker \
         git.release git.squash npm.install
