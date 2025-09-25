@@ -21,6 +21,8 @@ CURRENT_BRANCH := $(shell git branch | grep \* | cut -d ' ' -f2)
 # Extract versions from Dockerfile
 IMAGE_VER ?= $(strip \
 	$(shell grep 'ARG image_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+DEBIAN_VER ?= $(strip \
+	$(shell grep 'ARG debian_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 ANSIBLE_VER ?= $(strip \
 	$(shell grep 'ARG ansible_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
 BIOME_VER ?= $(strip \
@@ -91,6 +93,7 @@ docker-tags = $(strip $(or $(subst $(comma), ,$(tags)),$(TAGS)))
 # Usage:
 #	make docker.image [tag=($(VERSION)|<docker-tag>)] [no-cache=(no|yes)]
 #	                  [IMAGE_VER=<image-version>]
+#	                  [DEBIAN_VER=<debian-version>]
 #	                  [ANSIBLE_VER=<ansible-version>]
 #	                  [KUBECTL_VER=<kubectl-version>]
 #	                  [BIOME_VER=<biome-version>]
@@ -108,6 +111,7 @@ docker.image:
 	docker build --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg image_ver=$(IMAGE_VER) \
+		--build-arg debian_ver=$(DEBIAN_VER) \
 		--build-arg ansible_ver=$(ANSIBLE_VER) \
 		--build-arg kubectl_ver=$(KUBECTL_VER) \
 		--build-arg biome_ver=$(BIOME_VER) \
