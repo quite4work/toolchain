@@ -19,7 +19,7 @@ ARG butane_ver=0.25.0
 # Add "/root/.local/bin" path for pipx and other.
 ENV PATH="$PATH:/root/.local/bin"
 
-ENV DENO_INSTALL="/root/.deno"
+ENV DENO_INSTALL=/root/.deno
 ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 RUN mkdir -p /app/ /root/.local/bin/
