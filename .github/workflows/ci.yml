@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: ["master"]
   schedule:
-    - cron: "0 12 * * 2"
+    - cron: "0 12 * * 2" # TODO: Adjust schedule to avoid overlapping with other CI.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
