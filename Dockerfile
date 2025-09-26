@@ -25,7 +25,7 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 RUN mkdir -p /app/ /root/.local/bin/
 WORKDIR /app
 
-COPY requirements.txt ansible-galaxy.deps.yml /deps/
+COPY ansible/requirements.txt ansible/ansible-galaxy.deps.yml /deps/
 
 RUN apt-get update \
  && apt-get upgrade -y \
