@@ -7,13 +7,13 @@ ARG image_ver=1.0.0-r0
 ARG ansible_ver=9.13.0
 ARG biome_ver=2.2.4
 ARG deno_ver=2.5.2
-ARG doctl_ver=1.142.0
+ARG doctl_ver=1.145.0
 ARG hcloud_ver=1.52.0
 ARG helm_ver=3.19.0
 ARG jsonnet_bundler_ver=0.6.0
 ARG jsonnet_ver=0.21.0
 ARG kubectl_ver=1.34.1
-ARG terraform_ver=1.11.1
+ARG terraform_ver=1.13.3
 ARG butane_ver=0.25.1
 
 # Add "/root/.local/bin" path for pipx and other.
