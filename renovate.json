@@ -14,8 +14,7 @@
       "depNameTemplate": "library/debian",
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker",
-      "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}",
-      "registryUrls": ["https://registry.hub.docker.com"]
+      "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}"
     },
     {
       "customType": "regex",
