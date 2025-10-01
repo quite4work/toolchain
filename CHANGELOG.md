@@ -20,11 +20,12 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Added
 
-- Toolchain container. ([#13])
-- CI workflows. ([#13])
-- Unit tests. ([#13])
+- Toolchain container. ([#14])
+- CI workflows. ([#14])
+- Unit tests. ([#14])
+- Dependabot. ([#14])
 
-[#13]: /../../pull/13
+[#14]: /../../pull/14
 
 
 
