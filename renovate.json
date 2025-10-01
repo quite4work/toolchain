@@ -3,7 +3,27 @@
   "extends": [
     "config:recommended"
   ],
+  "ignoreDeps": [
+    "debian",
+    "ansible"
+  ],
   "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG debian_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "debian/debian",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG ansible_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "ansible/ansible",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}"
+    },
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ARG biome_ver=(?<currentValue>.*)"],
