@@ -27,9 +27,9 @@ jobs:
 
       - name: Run Renovate
         uses: renovatebot/github-action@v43.0.14
+        run: "npx renovate --print-config"
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --print-config
 
 
 
