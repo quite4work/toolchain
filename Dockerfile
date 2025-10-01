@@ -3,7 +3,7 @@ FROM debian:${debian_ver}
 
 ENV TOOLCHAIN_CONTAINER=1
 
-ARG image_ver=0.1.0
+ARG image_ver=0.1.0-r0
 ARG ansible_ver=9.13.0
 ARG biome_ver=2.2.4
 ARG deno_ver=2.5.1
