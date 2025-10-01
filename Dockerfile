@@ -1,4 +1,4 @@
-ARG debian_ver=12.10
+ARG debian_ver=12.12
 FROM debian:${debian_ver}
 
 ENV TOOLCHAIN_CONTAINER=1
@@ -8,7 +8,7 @@ ARG ansible_ver=9.13.0
 ARG biome_ver=2.2.4
 ARG deno_ver=2.5.2
 ARG doctl_ver=1.145.0
-ARG hcloud_ver=1.52.0
+ARG hcloud_ver=1.53.0
 ARG helm_ver=3.19.0
 ARG jsonnet_bundler_ver=0.6.0
 ARG jsonnet_ver=0.21.0
