@@ -4,10 +4,10 @@
     "config:recommended"
   ],
   "packageRules": [
-    // {
-    //   "matchDepNames": ["ansible"],
-    //   "allowedVersions": "9.13.x"
-    // }
+    {
+      "matchDepNames": ["ansible"],
+      "allowedVersions": "9.13.x"
+    }
   ],
   "regexManagers": [
     {
