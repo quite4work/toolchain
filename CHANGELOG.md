@@ -8,15 +8,15 @@ All user visible changes to this project will be documented in this file. This p
 
 ## master
 
-[Diff](/../../compare/0.1.0-r0...master)
+[Diff](/../../compare/1.0.0-r0...master)
 
 
 
 
-## [0.1.0-r0] · 2025-10-01
-[0.1.0-r0]: /../../tree/0.1.0-r0
+## [1.0.0-r0] · 2025-10-01
+[1.0.0-r0]: /../../tree/1.0.0-r0
 
-[Diff](/../../compare/5a0708ea92dd09c88aec44058f7a216e51da711d...0.1.0-r0)
+[Diff](/../../compare/5a0708ea92dd09c88aec44058f7a216e51da711d...1.0.0-r0)
 
 ### Added
 
