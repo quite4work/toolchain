@@ -19,10 +19,11 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ARG ansible_ver=(?<currentValue>.*)"],
-      "depNameTemplate": "ansible/ansible",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver",
-      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}"
+      "depNameTemplate": "ansible",
+      "datasourceTemplate": "pypi",
+      "versioningTemplate": "pep440",
+      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}",
+      "lookupNameTemplate": "ansible"
     },
     {
       "fileMatch": ["^Dockerfile$"],
