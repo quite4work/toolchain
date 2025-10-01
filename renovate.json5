@@ -13,10 +13,11 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ARG debian_ver=(?<currentValue>.*)"],
-      "depNameTemplate": "debian",
-      "datasourceTemplate": "apt",
-      "versioningTemplate": "regex",
-      "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}"
+      "depNameTemplate": "library/debian",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker",
+      "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}",
+      "registryUrls": ["https://registry.hub.docker.com"]
     },
     {
       "fileMatch": ["^Dockerfile$"],
