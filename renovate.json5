@@ -14,9 +14,8 @@
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ARG debian_ver=(?<currentValue>.*)"],
       "depNameTemplate": "debian",
-      "datasourceTemplate": "docker",
-      "registryUrls": ["https://registry.hub.docker.com"],
-      "versioningTemplate": "docker",
+      "datasourceTemplate": "apt",
+      "versioningTemplate": "regex",
       "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}"
     },
     {
