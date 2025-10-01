@@ -1,17 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "packageRules": [
     {
       "matchDepNames": ["ansible"],
-      "allowedVersions": "9.13.x"
-    }
+      "allowedVersions": "9.13.x"}
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG debian_ver=(?<currentValue>.*)"],
       "depNameTemplate": "library/debian",
       "datasourceTemplate": "docker",
@@ -20,16 +18,18 @@
       "registryUrls": ["https://registry.hub.docker.com"]
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG ansible_ver=(?<currentValue>.*)"],
       "depNameTemplate": "ansible",
       "datasourceTemplate": "pypi",
       "versioningTemplate": "pep440",
       "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}",
-      "lookupNameTemplate": "ansible"
+      "packageNameTemplate": "ansible"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG biome_ver=(?<currentValue>.*)"],
       "depNameTemplate": "biomejs/biome",
       "datasourceTemplate": "github-releases",
@@ -37,7 +37,8 @@
       "autoReplaceStringTemplate": "ARG biome_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG deno_ver=(?<currentValue>.*)"],
       "depNameTemplate": "denoland/deno",
       "datasourceTemplate": "github-releases",
@@ -45,7 +46,8 @@
       "autoReplaceStringTemplate": "ARG deno_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG doctl_ver=(?<currentValue>.*)"],
       "depNameTemplate": "digitalocean/doctl",
       "datasourceTemplate": "github-releases",
@@ -53,7 +55,8 @@
       "autoReplaceStringTemplate": "ARG doctl_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG hcloud_ver=(?<currentValue>.*)"],
       "depNameTemplate": "hetznercloud/cli",
       "datasourceTemplate": "github-releases",
@@ -61,7 +64,8 @@
       "autoReplaceStringTemplate": "ARG hcloud_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG helm_ver=(?<currentValue>.*)"],
       "depNameTemplate": "helm/helm",
       "datasourceTemplate": "github-releases",
@@ -69,7 +73,8 @@
       "autoReplaceStringTemplate": "ARG helm_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG jsonnet_bundler_ver=(?<currentValue>.*)"],
       "depNameTemplate": "jsonnet-bundler/jsonnet-bundler",
       "datasourceTemplate": "github-releases",
@@ -77,7 +82,8 @@
       "autoReplaceStringTemplate": "ARG jsonnet_bundler_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG jsonnet_ver=(?<currentValue>.*)"],
       "depNameTemplate": "google/go-jsonnet",
       "datasourceTemplate": "github-releases",
@@ -85,7 +91,8 @@
       "autoReplaceStringTemplate": "ARG jsonnet_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG kubectl_ver=(?<currentValue>.*)"],
       "depNameTemplate": "kubernetes/releases",
       "datasourceTemplate": "github-releases",
@@ -93,7 +100,8 @@
       "autoReplaceStringTemplate": "ARG kubectl_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG terraform_ver=(?<currentValue>.*)"],
       "depNameTemplate": "hashicorp/terraform",
       "datasourceTemplate": "github-releases",
@@ -101,7 +109,8 @@
       "autoReplaceStringTemplate": "ARG terraform_ver={{newValue}}"
     },
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG butane_ver=(?<currentValue>.*)"],
       "depNameTemplate": "coreos/butane",
       "datasourceTemplate": "github-releases",
