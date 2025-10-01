@@ -5,7 +5,12 @@
   ],
   "ignoreDeps": [
     "debian"
-    // "ansible"
+  ],
+  "packageRules": [
+    // {
+    //   "matchDepNames": ["ansible"],
+    //   "allowedVersions": "9.13.x"
+    // }
   ],
   "regexManagers": [
     {
