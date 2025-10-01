@@ -3,9 +3,6 @@
   "extends": [
     "config:recommended"
   ],
-  "ignoreDeps": [
-    "debian"
-  ],
   "packageRules": [
     // {
     //   "matchDepNames": ["ansible"],
@@ -16,9 +13,10 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": ["ARG debian_ver=(?<currentValue>.*)"],
-      "depNameTemplate": "debian/debian",
-      "datasourceTemplate": "github-releases",
-      "versioningTemplate": "semver",
+      "depNameTemplate": "debian",
+      "datasourceTemplate": "docker",
+      "registryUrls": ["https://registry.hub.docker.com"],
+      "versioningTemplate": "docker",
       "autoReplaceStringTemplate": "ARG debian_ver={{newValue}}"
     },
     {
