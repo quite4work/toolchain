@@ -2,5 +2,87 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG biome_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "biomejs/biome",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG biome_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG deno_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "denoland/deno",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG deno_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG doctl_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "digitalocean/doctl",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG doctl_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG hcloud_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "hetznercloud/cli",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG hcloud_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG helm_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "helm/helm",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG helm_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG jsonnet_bundler_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "jsonnet-bundler/jsonnet-bundler",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG jsonnet_bundler_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG jsonnet_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "google/go-jsonnet",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG jsonnet_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG kubectl_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "kubernetes/releases",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG kubectl_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG terraform_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "hashicorp/terraform",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG terraform_ver={{newValue}}"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ARG butane_ver=(?<currentValue>.*)"],
+      "depNameTemplate": "coreos/butane",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ARG butane_ver={{newValue}}"
+    }
   ]
 }
