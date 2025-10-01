@@ -1,4 +1,4 @@
-ARG debian_ver=12.10
+ARG debian_ver=12.12
 FROM debian:${debian_ver}
 
 ENV TOOLCHAIN_CONTAINER=1
