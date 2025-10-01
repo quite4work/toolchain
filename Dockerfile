@@ -14,7 +14,7 @@ ARG jsonnet_bundler_ver=0.6.0
 ARG jsonnet_ver=0.21.0
 ARG kubectl_ver=1.34.1
 ARG terraform_ver=1.11.1
-ARG butane_ver=0.25.0
+ARG butane_ver=0.25.1
 
 # Add "/root/.local/bin" path for pipx and other.
 ENV PATH="$PATH:/root/.local/bin"
