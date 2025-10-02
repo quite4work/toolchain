@@ -72,7 +72,8 @@ jobs:
 
       - name: Check code formatting
         uses: docker://ghcr.io/biomejs/biome:2.2.4
-        run: format .
+        with:
+          args: format .
 
 
 
