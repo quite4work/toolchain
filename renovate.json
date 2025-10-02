@@ -47,6 +47,15 @@
     },
     {
       "customType": "regex",
+      "managerFilePatterns": ["/^biome\\.jsonc?$/"],
+      "matchStrings": ["https://biomejs\\.dev/schemas/(?<currentValue>[0-9\\.]+)/schema\\.json"],
+      "depNameTemplate": "biomejs/biome",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "https://biomejs.dev/schemas/{{newValue}}/schema.json"
+    },
+    {
+      "customType": "regex",
       "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG deno_ver=(?<currentValue>.*)"],
       "depNameTemplate": "denoland/deno",
