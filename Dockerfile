@@ -5,7 +5,7 @@ ENV TOOLCHAIN_CONTAINER=1
 
 ARG image_ver=1.0.0-r0
 ARG ansible_ver=9.13.0
-ARG biome_ver=2.2.4
+ARG biome_ver=2.2.5
 ARG deno_ver=2.5.2
 ARG doctl_ver=1.145.0
 ARG hcloud_ver=1.53.0
