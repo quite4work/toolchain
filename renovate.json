@@ -125,13 +125,11 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["^minikube/bootstrap\\.sh$"],
-      "matchStrings": [
-        "MINIKUBE_K8S_VER=v\\${MINIKUBE_K8S_VER:-(?<currentValue>.*)}"
-      ],
+      "matchStrings": ["MINIKUBE_K8S_VER:-(?<currentValue>[0-9\\.]+)"],
       "depNameTemplate": "kubernetes/kubernetes",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
-      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER=v${MINIKUBE_K8S_VER:-{{{{newValue}}}}}"
+      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER:-{{newValue}}"
     },
     {
       "customType": "regex",
