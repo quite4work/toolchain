@@ -31,8 +31,8 @@
       "customType": "regex",
       "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG biome_ver=(?<currentValue>.*)"],
-      "depNameTemplate": "biomejs/biome",
-      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
       "versioningTemplate": "semver",
       "autoReplaceStringTemplate": "ARG biome_ver={{newValue}}"
     },
@@ -40,8 +40,8 @@
       "customType": "regex",
       "managerFilePatterns": ["/^\\.github/workflows/ci\\.yml$/"],
       "matchStrings": ["ghcr\\.io/biomejs/biome:(?<currentValue>.*)"],
-      "depNameTemplate": "biomejs/biome",
-      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
       "versioningTemplate": "semver",
       "autoReplaceStringTemplate": "ghcr.io/biomejs/biome:{{newValue}}"
     },
@@ -51,8 +51,8 @@
       "matchStrings": [
         "https://biomejs\\.dev/schemas/(?<currentValue>[0-9\\.]+)/schema\\.json"
       ],
-      "depNameTemplate": "biomejs/biome",
-      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
       "versioningTemplate": "semver",
       "autoReplaceStringTemplate": "https://biomejs.dev/schemas/{{newValue}}/schema.json"
     },
