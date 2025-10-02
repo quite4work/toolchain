@@ -131,7 +131,7 @@
       "depNameTemplate": "kubernetes/kubernetes",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
-      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER=v${MINIKUBE_K8S_VER:-{{newValue}}}"
+      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER=v${MINIKUBE_K8S_VER:-{{{{newValue}}}}}"
     },
     {
       "customType": "regex",
