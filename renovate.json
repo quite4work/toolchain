@@ -124,6 +124,15 @@
     },
     {
       "customType": "regex",
+      "managerFilePatterns": ["^minikube/bootstrap\\.sh$"],
+      "matchStrings": ["MINIKUBE_K8S_VER=v\\${MINIKUBE_K8S_VER:-(?<currentValue>.*)}"],
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER=v${MINIKUBE_K8S_VER:-{{newValue}}}"
+    },
+    {
+      "customType": "regex",
       "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG terraform_ver=(?<currentValue>.*)"],
       "depNameTemplate": "hashicorp/terraform",
