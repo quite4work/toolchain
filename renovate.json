@@ -48,7 +48,9 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["/^biome\\.jsonc?$/"],
-      "matchStrings": ["https://biomejs\\.dev/schemas/(?<currentValue>[0-9\\.]+)/schema\\.json"],
+      "matchStrings": [
+        "https://biomejs\\.dev/schemas/(?<currentValue>[0-9\\.]+)/schema\\.json"
+      ],
       "depNameTemplate": "biomejs/biome",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
