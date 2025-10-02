@@ -2,6 +2,10 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "packageRules": [
+    {
+      "matchDepNames": ["ansible"],
+      "allowedVersions": "9.13.x"
+    }
   ],
   "customManagers": [
     {
@@ -90,7 +94,7 @@
       "customType": "regex",
       "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG kubectl_ver=(?<currentValue>.*)"],
-      "depNameTemplate": "kubernetes/releases",
+      "depNameTemplate": "kubernetes/kubernetes",
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "semver",
       "autoReplaceStringTemplate": "ARG kubectl_ver={{newValue}}"
