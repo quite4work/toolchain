@@ -32,6 +32,8 @@ jobs:
           configurationFile: renovate.json
 
 
+
+
   ############
   # Building #
   ############
@@ -54,6 +56,21 @@ jobs:
           name: image-${{ github.run_number }}
           path: .cache/image.tar
           retention-days: 1
+
+
+
+
+  ##########################
+  # Linting and formatting #
+  ##########################
+
+  nodefmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker://ghcr.io/biomejs/biome:latest
+
+      - run: make node.fmt containerized=no
 
 
 
