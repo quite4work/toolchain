@@ -249,7 +249,7 @@ endif
 node.fmt:
 ifneq ($(dockerized),no)
 	docker run --rm -v "$(PWD)":/app/ -w /app/ \
-		ghcr.io/quite4work/toolchain-container:$(IMAGE_VER) \
+		ghcr.io/biomejs/biome:$(BIOME_VER) \
 			make node.fmt check=$(check) dockerized=no
 else
 	biome format . $(if $(call eq,$(check),yes),,--write)
