@@ -68,9 +68,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: docker://ghcr.io/biomejs/biome:latest
+      - uses: docker://ghcr.io/biomejs/biome:2.2.4
 
-      - run: make node.fmt containerized=no
+      - run: make node.fmt check=yes containerized=no
 
 
 
