@@ -23,7 +23,7 @@ All user visible changes to this project will be documented in this file. This p
 - Toolchain container. ([#14])
 - CI workflows. ([#14])
 - Unit tests. ([#14])
-- Dependabot. ([#14])
+- Renovate. ([#14])
 
 [#14]: /../../pull/14
 
