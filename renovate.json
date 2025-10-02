@@ -5,8 +5,8 @@
     {
       "matchDepNames": ["ansible"],
       "allowedVersions": "9.13.x"
-         }
-     ],
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
