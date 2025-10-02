@@ -38,6 +38,15 @@
     },
     {
       "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/workflows/ci\\.yml$/"],
+      "matchStrings": ["ghcr\\.io/biomejs/biome:(?<currentValue>.*)"],
+      "depNameTemplate": "biomejs/biome",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "ghcr.io/biomejs/biome:{{newValue}}"
+    },
+    {
+      "customType": "regex",
       "managerFilePatterns": ["/^Dockerfile$/"],
       "matchStrings": ["ARG deno_ver=(?<currentValue>.*)"],
       "depNameTemplate": "denoland/deno",
