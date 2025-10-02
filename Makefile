@@ -76,6 +76,7 @@ tags: docker.tags
 
 test: test.docker
 
+fmt: node.fmt
 
 
 
@@ -176,7 +177,7 @@ endef
 docker-tar-file = $(or $(to-file),.cache/image.tar)
 
 docker.tar:
-	@mkdir -p $(dir $(docker-tar-file))
+	mkdir -p $(dir $(docker-tar-file))
 	docker save -o $(docker-tar-file) \
 		$(foreach tag,$(subst $(comma), ,$(or $(tags),$(VERSION))),\
 			$(OWNER)/$(NAME):$(tag))
@@ -210,7 +211,7 @@ docker.untar:
 
 test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
-	@make npm.install
+	make npm.install
 endif
 	IMAGE=$(OWNER)/$(NAME):$(or $(tag),$(VERSION)) \
 	node_modules/.bin/bats \
@@ -221,9 +222,9 @@ endif
 
 
 
-################
-# NPM commands #
-################
+####################
+# Node.js commands #
+####################
 
 # Resolve project NPM dependencies.
 #
@@ -239,6 +240,20 @@ else
 	npm install
 endif
 
+
+# Format Node.js scripts.
+#
+# Usage:
+#	make node.fmt [check=(no|yes)] [dockerized=(yes|no)]
+
+node.fmt:
+ifneq ($(dockerized),no)
+	docker run --rm -v "$(PWD)":/app/ -w /app/ \
+		ghcr.io/quite4work/toolchain-container:$(IMAGE_VER) \
+			make node.fmt check=$(check) dockerized=no
+else
+	biome format . $(if $(call eq,$(check),yes),,--write)
+endif
 
 
 
@@ -293,7 +308,8 @@ endif
 # .PHONY section #
 ##################
 
-.PHONY: image push release squash tags test \
+.PHONY: image push release squash tags test fmt \
         docker.image docker.push docker.tags docker.tar docker.untar \
         docker.test test.docker \
-        git.release git.squash npm.install
+        git.release git.squash \
+        npm.install node.fmt
