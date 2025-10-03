@@ -73,21 +73,21 @@
 
 @test "biome runs ok" {
   run docker run --rm --pull never --entrypoint sh $IMAGE -c \
-    'biome --version'
+    'biome --help'
   [ "$status" -eq 0 ]
 }
 
 
 @test "butane runs ok" {
   run docker run --rm --pull never --entrypoint sh $IMAGE -c \
-    'butane --version'
+    'butane --help'
   [ "$status" -eq 0 ]
 }
 
 
 @test "ansible runs ok" {
   run docker run --rm --pull never --entrypoint sh $IMAGE -c \
-    'ansible --version'
+    'ansible --help'
   [ "$status" -eq 0 ]
 }
 
