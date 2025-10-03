@@ -59,7 +59,7 @@ RUN apt-get update \
  && curl -sL https://github.com/digitalocean/doctl/releases/download/v${doctl_ver}/doctl-${doctl_ver}-linux-amd64.tar.gz \
     | tar xz -C /root/.local/bin/ doctl \
  && echo "Installing Helm..." \
- && curl -sL https://get.helm.sh/helm-v{${helm_ver}}-linux-amd64.tar.gz \
+ && curl -sL https://get.helm.sh/helm-v${helm_ver}-linux-amd64.tar.gz \
     | tar xz --strip-components=1 -C /root/.local/bin/ linux-amd64/helm \
  && echo "Installing Biome..." \
  && curl -sL https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%40${biome_ver}/biome-linux-x64 \
