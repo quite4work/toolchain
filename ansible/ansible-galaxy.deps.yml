@@ -1,13 +1,12 @@
 ---
 
 roles:
-
   - name: instrumentisto.coreos-bootstrap
     src: git+https://github.com/instrumentisto/ansible-coreos-bootstrap
     version: 4.0.0
 
+# Check minimal Ansible version requirements before upgrading collections.
 collections:
-  # Check minimal Ansible version requirements before upgrading collections.
   # https://galaxy.ansible.com/ui/repo/published/community/digitalocean
   - name: community.digitalocean
     version: 1.27.0
