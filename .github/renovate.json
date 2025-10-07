@@ -1,0 +1,147 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "npm": {
+    "rangeStrategy": "replace"
+  },
+  "customManagers": [
+    {
+      "depNameTemplate": "ansible",
+      "datasourceTemplate": "pypi",
+      "versioningTemplate": "pep440",
+      "packageNameTemplate": "ansible",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG ansible_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}",
+    },
+    {
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG biome_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG biome_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": [".github/workflows/ci.yml"],
+      "matchStrings": ["ghcr\\.io/biomejs/biome:(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ghcr.io/biomejs/biome:{{newValue}}"
+    },
+    {
+      "depNameTemplate": "ghcr.io/biomejs/biome",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["biome.json"],
+      "matchStrings": [
+        "https://biomejs\\.dev/schemas/(?<currentValue>[0-9\\.]+)/schema\\.json"
+      ],
+      "autoReplaceStringTemplate": "https://biomejs.dev/schemas/{{newValue}}/schema.json"
+    },
+    {
+      "depNameTemplate": "coreos/butane",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG butane_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG butane_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "denoland/deno",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG deno_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG deno_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "digitalocean/doctl",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG doctl_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG doctl_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "hetznercloud/cli",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG hcloud_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG hcloud_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "helm/helm",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG helm_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG helm_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "google/go-jsonnet",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG jsonnet_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG jsonnet_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "jsonnet-bundler/jsonnet-bundler",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG jsonnet_bundler_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG jsonnet_bundler_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG kubectl_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG kubectl_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["/^minikube/bootstrap\\.sh$/"],
+      "matchStrings": ["MINIKUBE_K8S_VER:-(?<currentValue>[0-9\\.]+)"],
+      "autoReplaceStringTemplate": "MINIKUBE_K8S_VER:-{{newValue}}"
+    },
+    {
+      "depNameTemplate": "hashicorp/terraform",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG terraform_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG terraform_ver={{newValue}}"
+    },
+    {
+      "depNameTemplate": "library/python",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver",
+      "customType": "regex",
+      "managerFilePatterns": ["Dockerfile"],
+      "matchStrings": ["ARG python_ver=(?<currentValue>.*)"],
+      "autoReplaceStringTemplate": "ARG python_ver={{newValue}}"
+    }
+  ]
+}
