@@ -59,12 +59,22 @@ RUN pip install pipx \
 # Install Biome.
 RUN curl -fL -o /usr/local/bin/biome \
          https://github.com/biomejs/biome/releases/download/%40biomejs%2Fbiome%40${biome_ver}/biome-linux-x64 \
- && chmod +x /usr/local/bin/biome
+ && chmod +x /usr/local/bin/biome \
+    \
+ && mkdir -p /usr/local/share/doc/biome/ \
+ && curl -fL -o /usr/local/share/doc/biome/LICENSE-APACHE \
+         https://raw.githubusercontent.com/biomejs/biome/%40biomejs%2Fbiome%40${biome_ver}/LICENSE-APACHE \
+ && curl -fL -o /usr/local/share/doc/biome/LICENSE-MIT \
+         https://raw.githubusercontent.com/biomejs/biome/%40biomejs%2Fbiome%40${biome_ver}/LICENSE-MIT
 
 # Install Butane.
-RUN curl -fsL -o /usr/local/bin/butane \
+RUN curl -fL -o /usr/local/bin/butane \
          https://github.com/coreos/butane/releases/download/v${butane_ver}/butane-x86_64-unknown-linux-gnu \
- && chmod +x /usr/local/bin/butane
+ && chmod +x /usr/local/bin/butane \
+    \
+ && mkdir -p /usr/local/share/doc/butane/ \
+ && curl -fL -o /usr/local/share/doc/butane/LICENSE \
+         https://raw.githubusercontent.com/coreos/butane/v${butane_ver}/LICENSE
 
 # Install Deno.
 RUN curl -fsSL https://deno.land/install.sh \
@@ -72,33 +82,67 @@ RUN curl -fsSL https://deno.land/install.sh \
 
 # Install DigitalOcean CLI.
 RUN curl -fsL https://github.com/digitalocean/doctl/releases/download/v${doctl_ver}/doctl-${doctl_ver}-linux-amd64.tar.gz \
-    | tar xz -C /usr/local/bin/ \
-          doctl
+    | tar -xz -C /usr/local/bin/ \
+          doctl \
+    \
+ && mkdir -p /usr/local/share/doc/doctl/ \
+ && curl -fL -o /usr/local/share/doc/doctl/LICENSE.txt \
+         https://raw.githubusercontent.com/digitalocean/doctl/v${doctl_ver}/LICENSE.txt
 
 # Install HCloud CLI.
-RUN curl -fsL https://github.com/hetznercloud/cli/releases/download/v${hcloud_ver}/hcloud-linux-amd64.tar.gz \
-    | tar xz -C /usr/local/bin/ \
-          hcloud
+RUN curl -fL -o /tmp/hcloud.tar.gz \
+         https://github.com/hetznercloud/cli/releases/download/v${hcloud_ver}/hcloud-linux-amd64.tar.gz \
+ && tar -xzf /tmp/hcloud.tar.gz -C /usr/local/bin/ \
+        hcloud \
+    \
+ && mkdir -p /usr/local/share/doc/hcloud/ \
+ && tar -xzf /tmp/hcloud.tar.gz -C /usr/local/share/doc/hcloud/ LICENSE \
+    \
+ && rm -rf /tmp/*
 
 # Install Helm.
-RUN curl -fsL https://get.helm.sh/helm-v${helm_ver}-linux-amd64.tar.gz \
-    | tar xz --strip-components=1 -C /usr/local/bin/ \
-          linux-amd64/helm
+RUN curl -fL -o /tmp/helm.tar.gz \
+         https://get.helm.sh/helm-v${helm_ver}-linux-amd64.tar.gz \
+ && tar -xzf /tmp/helm.tar.gz -C /usr/local/bin/ \
+                              --strip-components=1 \
+        linux-amd64/helm \
+    \
+ && mkdir -p /usr/local/share/doc/helm/ \
+ && tar -xzf /tmp/helm.tar.gz -C /usr/local/share/doc/helm/ \
+                              --strip-components=1 \
+        linux-amd64/LICENSE \
+    \
+ && rm -rf /tmp/*
 
 # Install Jsonnet.
-RUN curl -fsL https://github.com/google/go-jsonnet/releases/download/v${jsonnet_ver}/go-jsonnet_Linux_x86_64.tar.gz \
-    | tar xz -C /usr/local/bin/ \
-          jsonnet jsonnet-deps jsonnet-lint jsonnetfmt
+RUN curl -fL -o /tmp/jsonnet.tar.gz \
+         https://github.com/google/go-jsonnet/releases/download/v${jsonnet_ver}/go-jsonnet_Linux_x86_64.tar.gz \
+ && tar -xzf /tmp/jsonnet.tar.gz -C /usr/local/bin/ \
+        jsonnet jsonnet-deps jsonnet-lint jsonnetfmt \
+    \
+ && mkdir -p /usr/local/share/doc/jsonnet/ \
+ && tar -xzf /tmp/jsonnet.tar.gz -C /usr/local/share/doc/jsonnet/ \
+        LICENSE \
+    \
+ && rm -rf /tmp/*
 
 # Install Jsonnet Bundler.
-RUN curl -fsL -o /usr/local/bin/jb \
+RUN curl -fL -o /usr/local/bin/jb \
     https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v${jsonnet_bundler_ver}/jb-linux-amd64 \
- && chmod +x /usr/local/bin/jb
+ && chmod +x /usr/local/bin/jb \
+    \
+ && mkdir -p /usr/local/share/doc/jb/ \
+ && curl -fL -o /usr/local/share/doc/jb/LICENSE \
+         https://raw.githubusercontent.com/jsonnet-bundler/jsonnet-bundler/v${jsonnet_bundler_ver}/LICENSE
 
 # Install Kubernetes CLI.
 RUN curl -fL -o /usr/local/bin/kubectl \
          https://dl.k8s.io/release/v${kubectl_ver}/bin/linux/amd64/kubectl \
- && chmod +x /usr/local/bin/kubectl
+ && chmod +x /usr/local/bin/kubectl \
+    \
+ && mkdir -p /usr/local/share/doc/kubectl/ \
+ && curl -fL -o /usr/local/share/doc/kubectl/LICENSE \
+         https://raw.githubusercontent.com/kubernetes/kubernetes/v${kubectl_ver}/LICENSES/LICENSE
 
 # Install Terraform.
 RUN apt-get update \
@@ -106,13 +150,20 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends --no-install-suggests \
             $toolDeps \
     \
- && curl -fsL https://releases.hashicorp.com/terraform/${terraform_ver}/terraform_${terraform_ver}_linux_amd64.zip \
-    | bsdtar -C /usr/local/bin/ -xf - terraform \
+ && curl -fL -o /tmp/terraform.zip \
+         https://releases.hashicorp.com/terraform/${terraform_ver}/terraform_${terraform_ver}_linux_amd64.zip \
+ && bsdtar -C /usr/local/bin/ -xf /tmp/terraform.zip \
+           terraform \
  && chmod +x /usr/local/bin/terraform \
+    \
+ && mkdir -p /usr/local/share/doc/terraform/ \
+ && bsdtar -C /usr/local/share/doc/terraform/ -xf /tmp/terraform.zip \
+           LICENSE.txt \
     \
  && apt-get purge -y --auto-remove \
                       -o APT::AutoRemove::RecommendsImportant=false \
             $toolDeps \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+           /tmp/*
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
