@@ -2,14 +2,14 @@ Toolchain and its Docker image
 ==============================
 
 [![Release](https://img.shields.io/github/v/release/instrumentisto/toolchain "Release")](https://github.com/instrumentisto/toolchain/releases)
-[![CI](https://github.com/instrumentisto/toolchain/actions/workflows/ci.yml/badge.svg?branch=master "CI")](https://github.com/instrumentisto/toolchain/actions?query=workflow%3ACI+branch%3Amaster)
+[![CI](https://github.com/instrumentisto/toolchain/actions/workflows/ci.yml/badge.svg?branch=main "CI")](https://github.com/instrumentisto/toolchain/actions?query=workflow%3ACI+branch%3Amain)
 [![Docker Hub](https://img.shields.io/docker/pulls/instrumentisto/toolchain?label=Docker%20Hub%20pulls "Docker Hub pulls")](https://hub.docker.com/r/instrumentisto/toolchain)
 
 [Docker Hub](https://hub.docker.com/r/instrumentisto/toolchain)
 | [GitHub Container Registry](https://github.com/orgs/instrumentisto/packages/container/package/toolchain)
 | [Quay.io](https://quay.io/repository/instrumentisto/toolchain)
 
-[Changelog](https://github.com/instrumentisto/toolchain/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/instrumentisto/toolchain/blob/main/CHANGELOG.md)
 
 Lifesaving tools used by Instrumentisto Team.
 
@@ -46,7 +46,7 @@ If you have any problems with or questions about this image, please contact us t
 [DockerHub]: https://hub.docker.com
 
 [90]: https://github.com/instrumentisto/toolchain/issues
-[91]: https://github.com/instrumentisto/toolchain/blob/master/LICENSE.md
+[91]: https://github.com/instrumentisto/toolchain/blob/main/LICENSE.md
 [92]: https://github.com/instrumentisto/toolchain
 
-[d1]: https://github.com/instrumentisto/toolchain/blob/master/Dockerfile
+[d1]: https://github.com/instrumentisto/toolchain/blob/main/Dockerfile
