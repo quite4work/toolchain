@@ -8,7 +8,7 @@ ARG biome_ver=2.2.5
 ARG butane_ver=0.25.1
 ARG deno_ver=2.5.3
 ARG doctl_ver=1.145.0
-ARG hcloud_ver=1.53.0
+ARG hcloud_ver=1.54.0
 ARG helm_ver=3.19.0
 ARG jsonnet_ver=0.21.0
 ARG jsonnet_bundler_ver=0.6.0
@@ -89,7 +89,7 @@ RUN curl -fsL https://github.com/digitalocean/doctl/releases/download/v${doctl_v
  && curl -fL -o /usr/local/share/doc/doctl/LICENSE.txt \
          https://raw.githubusercontent.com/digitalocean/doctl/v${doctl_ver}/LICENSE.txt
 
-# Install HCloud CLI.
+# Install Hetzner Cloud CLI.
 RUN curl -fL -o /tmp/hcloud.tar.gz \
          https://github.com/hetznercloud/cli/releases/download/v${hcloud_ver}/hcloud-linux-amd64.tar.gz \
  && tar -xzf /tmp/hcloud.tar.gz -C /usr/local/bin/ \
