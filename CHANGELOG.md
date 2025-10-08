@@ -6,9 +6,10 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.0.0] · 2025-10-08
+[1.0.0]: /../../tree/1.0.0
 
-[Diff](/../../compare/5a0708ea92dd09c88aec44058f7a216e51da711d...main)
+[Diff](/../../compare/5a0708ea92dd09c88aec44058f7a216e51da711d...1.0.0)
 
 ### Created
 
