@@ -13,6 +13,13 @@ All user visible changes to this project will be documented in this file. This p
 ### Created
 
 - [Ansible] 9.13.0: <https://github.com/ansible-community/ansible-build-data/blob/9.13.0/9/CHANGELOG-v9.md#release-summary>
+- [Ansible] collections:
+    - [`community.digitalocean`] 1.27.0: <https://github.com/ansible-collections/community.digitalocean/releases/tag/1.27.0>
+    - [`community.general`] 10.5.0: <https://github.com/ansible-collections/community.general/blob/10.5.0/CHANGELOG.md#v10-5-0>
+    - [`containers.podman`] 1.16.3: <https://github.com/containers/ansible-podman-collections/blob/1.16.3/CHANGELOG.rst#v1-16-3>
+    - [`hetzner.hcloud`] 4.3.0: <https://github.com/ansible-collections/hetzner.hcloud/releases/tag/4.3.0>
+    - [`kubernetes.core`] 5.2.0: <https://github.com/ansible-collections/kubernetes.core/blob/5.2.0/CHANGELOG.rst#v5-2-0>
+    - [`vultr.cloud`] 1.13.0: <https://github.com/vultr/ansible-collection-vultr/releases/tag/v1.13.0>
 - [Biome] 2.2.5: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.2.5>
 - [Butane] 0.25.1: <https://github.com/coreos/butane/releases/tag/v0.25.1>
 - [Deno] 2.5.3: <https://github.com/denoland/deno/releases/tag/v2.5.3>
@@ -23,11 +30,18 @@ All user visible changes to this project will be documented in this file. This p
 - [Jsonnet Bundler] 0.6.0: <https://github.com/jsonnet-bundler/jsonnet-bundler/releases/tag/v0.6.0>
 - [Kubernetes CLI] 1.34.1: <https://github.com/kubernetes/kubernetes/blob/70af7708fcc585a717f9208f83a4351585440bab/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1340>
 - [Python] 3.13.7: <https://docs.python.org/3.13/whatsnew/changelog.html#python-3-13-7-final>
+- [pip] packages: `jmespath`, `hcloud`, `kubernetes-validate`, `kubernetes`, `netaddr`
 - [Terraform] 1.13.3: <https://github.com/hashicorp/terraform/releases/tag/v1.13.3>
 
 
 
 
+[`community.digitalocean`]: https://galaxy.ansible.com/ui/repo/published/community/digitalocean
+[`community.general`]: https://galaxy.ansible.com/ui/repo/published/community/general
+[`containers.podman`]: https://galaxy.ansible.com/ui/repo/published/containers/podman
+[`hetzner.hcloud`]: https://galaxy.ansible.com/ui/repo/published/hetzner/hcloud
+[`kubernetes.core`]: https://galaxy.ansible.com/ui/repo/published/kubernetes/core
+[`vultr.cloud`]: https://galaxy.ansible.com/ui/repo/published/vultr/cloud
 [Ansible]: https://redhat.com/ansible-collaborative
 [Biome]: https://biomejs.dev
 [Butane]: https://coreos.github.io/butane
@@ -38,6 +52,7 @@ All user visible changes to this project will be documented in this file. This p
 [Jsonnet]: https://jsonnet.org
 [Jsonnet Bundler]: https://github.com/jsonnet-bundler/jsonnet-bundler
 [Kubernetes CLI]: https://kubernetes.io/docs/reference/kubectl
+[pip]: https://pypi.org/project/pip
 [Python]: https://python.org
 [Semantic Versioning 2.0.0]: https://semver.org
 [Terraform]: https://hashicorp.com/products/terraform
