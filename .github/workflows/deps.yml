@@ -1,0 +1,20 @@
+name: Dependencies
+
+on:
+  schedule:
+    - cron: "7 7 * * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: renovatebot/github-action@v43.0.15
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          configurationFile: .github/renovate.json
