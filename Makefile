@@ -15,45 +15,41 @@ eq = $(if $(or $(1),$(2)),$(and $(findstring $(1),$(2)),\
 # Project parameters #
 ######################
 
-MAINLINE_BRANCH := master
-CURRENT_BRANCH := $(shell git branch | grep \* | cut -d ' ' -f2)
-
-# Extract versions from Dockerfile
 IMAGE_VER ?= $(strip \
-	$(shell grep 'ARG image_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-DEBIAN_VER ?= $(strip \
-	$(shell grep 'ARG debian_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+	$(shell grep 'ARG image_ver=' Dockerfile | cut -d '=' -f2))
 ANSIBLE_VER ?= $(strip \
-	$(shell grep 'ARG ansible_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+	$(shell grep 'ARG ansible_ver=' Dockerfile | cut -d '=' -f2))
 BIOME_VER ?= $(strip \
-	$(shell grep 'ARG biome_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-DENO_VER ?= $(strip \
-	$(shell grep 'ARG deno_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-DOCTL_VER ?= $(strip \
-	$(shell grep 'ARG doctl_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-HCLOUD_VER ?= $(strip \
-	$(shell grep 'ARG hcloud_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-HELM_VER ?= $(strip \
-	$(shell grep 'ARG helm_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-JSONNET_BUNDLER_VER ?= $(strip \
-	$(shell grep 'ARG jsonnet_bundler_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-JSONNET_VER ?= $(strip \
-	$(shell grep 'ARG jsonnet_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-KUBECTL_VER ?= $(strip \
-	$(shell grep 'ARG kubectl_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
-TERRAFORM_VER ?= $(strip \
-	$(shell grep 'ARG terraform_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+	$(shell grep 'ARG biome_ver=' Dockerfile | cut -d '=' -f2))
 BUTANE_VER ?= $(strip \
-	$(shell grep 'ARG butane_ver=' Dockerfile | cut -d '=' -f2 | tr -d '"'))
+	$(shell grep 'ARG butane_ver=' Dockerfile | cut -d '=' -f2))
+DENO_VER ?= $(strip \
+	$(shell grep 'ARG deno_ver=' Dockerfile | cut -d '=' -f2))
+DOCTL_VER ?= $(strip \
+	$(shell grep 'ARG doctl_ver=' Dockerfile | cut -d '=' -f2))
+HCLOUD_VER ?= $(strip \
+	$(shell grep 'ARG hcloud_ver=' Dockerfile | cut -d '=' -f2))
+HELM_VER ?= $(strip \
+	$(shell grep 'ARG helm_ver=' Dockerfile | cut -d '=' -f2))
+JSONNET_VER ?= $(strip \
+	$(shell grep 'ARG jsonnet_ver=' Dockerfile | cut -d '=' -f2))
+JSONNET_BUNDLER_VER ?= $(strip \
+	$(shell grep 'ARG jsonnet_bundler_ver=' Dockerfile | cut -d '=' -f2))
+KUBECTL_VER ?= $(strip \
+	$(shell grep 'ARG kubectl_ver=' Dockerfile | cut -d '=' -f2))
+PYTHON_VER ?= $(strip \
+	$(shell grep 'ARG python_ver=' Dockerfile | cut -d '=' -f2))
+TERRAFORM_VER ?= $(strip \
+	$(shell grep 'ARG terraform_ver=' Dockerfile | cut -d '=' -f2))
 
-NODE_VER ?= latest
-NAME := toolchain-container
+NAME := toolchain
 OWNER := $(or $(GITHUB_REPOSITORY_OWNER),instrumentisto)
 REGISTRIES := $(strip $(subst $(comma), ,\
 	$(shell grep -m1 'registry: \["' .github/workflows/ci.yml \
 	        | cut -d':' -f2 | tr -d '"][')))
 TAGS ?= $(IMAGE_VER) \
         $(strip $(shell echo $(IMAGE_VER) | cut -d '.' -f1,2)) \
+        $(strip $(shell echo $(IMAGE_VER) | cut -d '.' -f1)) \
         latest
 VERSION ?= $(word 1,$(subst $(comma), ,$(TAGS)))
 
@@ -64,7 +60,7 @@ VERSION ?= $(word 1,$(subst $(comma), ,$(TAGS)))
 # Aliases #
 ###########
 
-squash: git.squash
+fmt: biome.fmt
 
 image: docker.image
 
@@ -76,7 +72,6 @@ tags: docker.tags
 
 test: test.docker
 
-fmt: node.fmt
 
 
 
@@ -94,41 +89,43 @@ docker-tags = $(strip $(or $(subst $(comma), ,$(tags)),$(TAGS)))
 # Usage:
 #	make docker.image [tag=($(VERSION)|<docker-tag>)] [no-cache=(no|yes)]
 #	                  [IMAGE_VER=<image-version>]
-#	                  [DEBIAN_VER=<debian-version>]
 #	                  [ANSIBLE_VER=<ansible-version>]
-#	                  [KUBECTL_VER=<kubectl-version>]
 #	                  [BIOME_VER=<biome-version>]
+#	                  [BUTANE_VER=<butane-version>]
 #	                  [DENO_VER=<deno-version>]
 #	                  [DOCTL_VER=<doctl-version>]
 #	                  [HCLOUD_VER=<hcloud-version>]
 #	                  [HELM_VER=<helm-version>]
-#	                  [JSONNET_BUNDLER_VER=<jsonnet-bundler-version>]
 #	                  [JSONNET_VER=<jsonnet-version>]
+#	                  [JSONNET_BUNDLER_VER=<jsonnet-bundler-version>]
+#	                  [KUBECTL_VER=<kubectl-version>]
+#	                  [PYTHON_VER=<python-version>]
 #	                  [TERRAFORM_VER=<terraform-version>]
-#	                  [BUTANE_VER=<butane-version>]
+
 github_url := $(strip $(or $(GITHUB_SERVER_URL),https://github.com))
 github_repo := $(strip $(or $(GITHUB_REPOSITORY),$(OWNER)/$(NAME)))
+
 docker.image:
-	docker build --force-rm \
+	docker build --network=host --force-rm \
 		$(if $(call eq,$(no-cache),yes),--no-cache --pull,) \
 		--build-arg image_ver=$(IMAGE_VER) \
-		--build-arg debian_ver=$(DEBIAN_VER) \
 		--build-arg ansible_ver=$(ANSIBLE_VER) \
-		--build-arg kubectl_ver=$(KUBECTL_VER) \
 		--build-arg biome_ver=$(BIOME_VER) \
+		--build-arg butane_ver=$(BUTANE_VER) \
 		--build-arg deno_ver=$(DENO_VER) \
 		--build-arg doctl_ver=$(DOCTL_VER) \
 		--build-arg hcloud_ver=$(HCLOUD_VER) \
 		--build-arg helm_ver=$(HELM_VER) \
-		--build-arg jsonnet_bundler_ver=$(JSONNET_BUNDLER_VER) \
 		--build-arg jsonnet_ver=$(JSONNET_VER) \
+		--build-arg jsonnet_bundler_ver=$(JSONNET_BUNDLER_VER) \
+		--build-arg kubectl_ver=$(KUBECTL_VER) \
+		--build-arg python_ver=$(PYTHON_VER) \
 		--build-arg terraform_ver=$(TERRAFORM_VER) \
-		--build-arg butane_ver=$(BUTANE_VER) \
 		--label org.opencontainers.image.source=$(github_url)/$(github_repo) \
 		--label org.opencontainers.image.revision=$(strip \
 			$(shell git show --pretty=format:%H --no-patch)) \
 		--label org.opencontainers.image.version=$(strip \
-			$(shell git describe --tags --dirty)) \
+			$(or $(shell git describe --tags --dirty),$(VERSION))) \
 		-t $(OWNER)/$(NAME):$(or $(tag),$(VERSION)) ./
 
 
@@ -211,7 +208,7 @@ docker.untar:
 
 test.docker:
 ifeq ($(wildcard node_modules/.bin/bats),)
-	make npm.install
+	@make npm.install
 endif
 	IMAGE=$(OWNER)/$(NAME):$(or $(tag),$(VERSION)) \
 	node_modules/.bin/bats \
@@ -222,9 +219,9 @@ endif
 
 
 
-####################
-# Node.js commands #
-####################
+################
+# NPM commands #
+################
 
 # Resolve project NPM dependencies.
 #
@@ -241,13 +238,19 @@ else
 endif
 
 
-# Format Node.js scripts.
+
+
+##################
+# Biome commands #
+##################
+
+# Format sources with Biome.
 #
 # Usage:
-#	make node.fmt [check=(no|yes)] [dockerized=(yes|no)]
+#	make biome.fmt [check=(no|yes)] [dockerized=(no|yes)]
 
-node.fmt:
-ifneq ($(dockerized),no)
+biome.fmt:
+ifeq ($(dockerized),yes)
 	docker run --rm -v "$(PWD)":/app/ -w /app/ \
 		ghcr.io/biomejs/biome:$(BIOME_VER) \
 			format . $(if $(call eq,$(check),yes),,--write)
@@ -257,35 +260,10 @@ endif
 
 
 
+
 ################
 # Git commands #
 ################
-
-# Squash changes of the current Git branch onto another Git branch.
-#
-# WARNING: You must merge `onto` branch in the current branch before squash!
-#
-# Usage:
-#	make git.squash [onto=(<mainline-git-branch>|<git-branch>)]
-#	                [del=(no|yes)]
-#	                [upstream=(origin|<git-remote>)]
-
-onto ?= $(MAINLINE_BRANCH)
-upstream ?= origin
-
-git.squash:
-ifeq ($(CURRENT_BRANCH),$(onto))
-	echo "--> Current branch is '$(onto)' already" && false
-endif
-	git checkout $(onto)
-	git branch -m $(CURRENT_BRANCH) orig-$(CURRENT_BRANCH)
-	git checkout -b $(CURRENT_BRANCH)
-	git branch --set-upstream-to $(upstream)/$(CURRENT_BRANCH)
-	git merge --squash orig-$(CURRENT_BRANCH)
-ifeq ($(del),yes)
-	git branch -d orig-$(CURRENT_BRANCH)
-endif
-
 
 # Release project version (apply version tag and push).
 #
@@ -298,7 +276,7 @@ git.release:
 ifeq ($(shell git rev-parse $(git-release-tag) >/dev/null 2>&1 && echo "ok"),ok)
 	$(error "Git tag $(git-release-tag) already exists")
 endif
-	git tag $(git-release-tag) $(MAINLINE_BRANCH)
+	git tag $(git-release-tag) master
 	git push origin refs/tags/$(git-release-tag)
 
 
@@ -308,8 +286,10 @@ endif
 # .PHONY section #
 ##################
 
-.PHONY: image push release squash tags test fmt \
-        docker.image docker.push docker.tags docker.tar docker.untar \
-        docker.test test.docker \
-        git.release git.squash \
-        npm.install node.fmt
+.PHONY: fmt image push release tags test \
+        biome.fmt \
+        docker.image docker.push docker.tags docker.tar docker.test \
+        docker.untar \
+        git.release \
+        npm.install \
+        test.docker
