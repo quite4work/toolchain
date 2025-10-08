@@ -1,7 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "labels": ["enhancement" ,"k::dependencies"],
+  "packageRules": [
+    {
+      "matchFileNames": ["Dockerfile"],
+      "addLabels": ["docker"]
+    }
+  ],
+  "github-actions": {
+    "addLabels": ["github_actions"]
+  },
   "npm": {
+    "addLabels": ["npm"],
     "rangeStrategy": "replace"
   },
   "customManagers": [
@@ -13,7 +24,7 @@
       "customType": "regex",
       "managerFilePatterns": ["Dockerfile"],
       "matchStrings": ["ARG ansible_ver=(?<currentValue>.*)"],
-      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}",
+      "autoReplaceStringTemplate": "ARG ansible_ver={{newValue}}"
     },
     {
       "depNameTemplate": "ghcr.io/biomejs/biome",

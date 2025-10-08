@@ -2,7 +2,7 @@ name: Dependencies
 
 on:
   schedule:
-    - cron: "15 9 * * *"
+    - cron: "7 7 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
