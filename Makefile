@@ -125,7 +125,7 @@ docker.image:
 		--label org.opencontainers.image.revision=$(strip \
 			$(shell git show --pretty=format:%H --no-patch)) \
 		--label org.opencontainers.image.version=$(strip \
-			$(or $(shell git describe --tags --dirty),$(VERSION))) \
+			$(shell git describe --tags --dirty)) \
 		-t $(OWNER)/$(NAME):$(or $(tag),$(VERSION)) ./
 
 
