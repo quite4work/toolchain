@@ -18,6 +18,9 @@ ARG terraform_ver=1.13.3
 # Indication that the current context is inside this toolchain container.
 ENV TOOLCHAIN=1
 
+# Set Vim as the default editor explicitly.
+ENV EDITOR=vim
+
 # Prepare project directory.
 RUN mkdir -p /app/
 WORKDIR /app/
