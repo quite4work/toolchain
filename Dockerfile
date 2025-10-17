@@ -2,7 +2,7 @@ ARG python_ver=3.13.7
 # https://hub.docker.com/_/python/
 FROM python:${python_ver}-slim-trixie
 
-ARG image_ver=1.0.0
+ARG image_ver=1.1.0
 ARG ansible_ver=9.13.0
 ARG biome_ver=2.2.5
 ARG butane_ver=0.25.1
@@ -29,6 +29,7 @@ RUN apt-get update \
             ca-certificates \
             curl \
             git \
+            vim \
             libvirt-clients \
             make \
             rsync \

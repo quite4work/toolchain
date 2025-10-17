@@ -6,6 +6,18 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## [1.0.0] · 2025-10-??
+[1.1.0]: /../../tree/1.1.0
+
+[Diff](/../../compare/1.0.0...1.1.0)
+
+### Created
+
+- [Vim] to use as a default editor inside toolchain container
+
+
+
+
 ## [1.0.0] · 2025-10-08
 [1.0.0]: /../../tree/1.0.0
 
@@ -57,3 +69,4 @@ All user visible changes to this project will be documented in this file. This p
 [Python]: https://python.org
 [Semantic Versioning 2.0.0]: https://semver.org
 [Terraform]: https://hashicorp.com/products/terraform
+[Vim]: https://www.vim.org
