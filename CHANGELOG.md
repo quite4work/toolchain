@@ -6,9 +6,10 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## main
+## [1.1.0] · 2025-10-22
+[1.1.0]: /../../tree/1.1.0
 
-[Diff](/../../compare/1.0.0...main)
+[Diff](/../../compare/1.0.0...1.1.0)
 
 ### Upgraded
 
@@ -17,6 +18,10 @@ All user visible changes to this project will be documented in this file. This p
 - [DigitalOcean CLI] 1.146.0: <https://github.com/digitalocean/doctl/releases/tag/v1.146.0>
 - [Hetzner Cloud CLI] 1.55.0: <https://github.com/hetznercloud/cli/releases/tag/v1.55.0>
 - [Terraform] 1.13.4: <https://github.com/hashicorp/terraform/releases/tag/v1.13.4>
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251020 (13.1): <https://github.com/docker-library/official-images/commit/7d7121f027cea92f35edf151aef7d1175b9e1464>
 
 
 
