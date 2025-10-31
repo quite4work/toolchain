@@ -4,14 +4,15 @@
   "labels": ["enhancement", "k::dependencies"],
   "packageRules": [
     {
-      "matchFileNames": ["Dockerfile"],
-      "addLabels": ["docker"]
+      "addLabels": ["docker"],
+      "matchFileNames": ["Dockerfile"]
     },
     {
-      "matchManagers": ["ansible-galaxy", "pip_requirements", "regex"],
-      "matchPackagePatterns": ["ansible", "python"],
+      "addLabels": ["ansible", "python"],
       "groupName": "ansible-python",
-      "addLabels": ["ansible", "python"]
+      "matchDepNames": ["library/python"],
+      "matchManagers": ["ansible-galaxy", "pip_requirements", "regex"],
+      "matchPackageNames": ["ansible"],
     }
   ],
   "pip_requirements": {
