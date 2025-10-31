@@ -299,7 +299,7 @@
   expected="$output"
 
   run docker run --rm --pull never $IMAGE sh -c \
-    "terraform --version | grep 'Terraform ' | cut -d 'v' -f2"
+    "terraform --version | grep 'Terraform v' | cut -d 'v' -f2"
   [ "$status" -eq 0 ]
   [ ! "$output" = '' ]
   actual="$output"

@@ -6,14 +6,83 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.0.0] · 2025-10-??
-[1.1.0]: /../../tree/1.1.0
+## [1.3.0] · 2025-11-??
+[1.3.0]: /../../tree/1.3.0
 
-[Diff](/../../compare/1.0.0...1.1.0)
+[Diff](/../../compare/1.2.3...1.3.0)
 
 ### Created
 
 - [Vim] to use as a default editor inside toolchain container
+
+
+
+
+## [1.2.3] · 2025-10-30
+[1.2.3]: /../../tree/1.2.3
+
+[Diff](/../../compare/1.2.2...1.2.3)
+
+### Upgraded
+
+- [Deno] 2.5.6: <https://github.com/denoland/deno/releases/tag/v2.5.6>
+
+
+
+
+## [1.2.2] · 2025-10-29
+[1.2.2]: /../../tree/1.2.2
+
+[Diff](/../../compare/1.2.1...1.2.2)
+
+### Upgraded
+
+- [Biome] 2.3.2: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.2>
+- [Deno] 2.5.5: <https://github.com/denoland/deno/releases/tag/v2.5.5>
+
+
+
+
+## [1.2.1] · 2025-10-27
+[1.2.1]: /../../tree/1.2.1
+
+[Diff](/../../compare/1.2.0...1.2.1)
+
+### Upgraded
+
+- [Biome] 2.3.1: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.1>
+
+
+
+
+## [1.2.0] · 2025-10-24
+[1.2.0]: /../../tree/1.2.0
+
+[Diff](/../../compare/1.1.0...1.2.0)
+
+### Upgraded
+
+- [Biome] 2.3.0: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.0>
+
+
+
+
+## [1.1.0] · 2025-10-22
+[1.1.0]: /../../tree/1.1.0
+
+[Diff](/../../compare/1.0.0...1.1.0)
+
+### Upgraded
+
+- [Biome] 2.2.7: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.2.7>
+- [Deno] 2.5.4: <https://github.com/denoland/deno/releases/tag/v2.5.4>
+- [DigitalOcean CLI] 1.146.0: <https://github.com/digitalocean/doctl/releases/tag/v1.146.0>
+- [Hetzner Cloud CLI] 1.55.0: <https://github.com/hetznercloud/cli/releases/tag/v1.55.0>
+- [Terraform] 1.13.4: <https://github.com/hashicorp/terraform/releases/tag/v1.13.4>
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251020 (13.1): <https://github.com/docker-library/official-images/commit/7d7121f027cea92f35edf151aef7d1175b9e1464>
 
 
 
