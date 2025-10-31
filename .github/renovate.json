@@ -9,9 +9,9 @@
     },
     {
       "matchManagers": ["ansible-galaxy", "pip_requirements", "regex"],
-      "matchPackagePatterns": ["ansible"],
-      "groupName": "ansible",
-      "addLabels": ["ansible"]
+      "matchPackagePatterns": ["ansible", "python"],
+      "groupName": "ansible-python",
+      "addLabels": ["ansible", "python"]
     }
   ],
   "pip_requirements": {
