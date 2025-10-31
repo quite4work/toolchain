@@ -2,4 +2,4 @@ jmespath==1.0.1
 hcloud==1.36.1
 kubernetes-validate==0.4.4
 kubernetes==26.1.0
-netaddr==0.8.1
+netaddr==0.10.1
