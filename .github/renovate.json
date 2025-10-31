@@ -8,8 +8,13 @@
       "addLabels": ["docker"]
     }
   ],
-  "ansible": {
-    "addLabels": ["ansible"]
+  "pip_requirements": {
+    "addLabels": ["pip_requirements"],
+    "managerFilePatterns": ["ansible/pip.requirements.txt"],
+  },
+  "ansible-galaxy": {
+    "addLabels": ["ansible-galaxy"],
+    "managerFilePatterns": ["ansible/ansible-galaxy.deps.yml"],
   },
   "github-actions": {
     "addLabels": ["github_actions"]
