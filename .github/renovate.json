@@ -6,14 +6,18 @@
     {
       "matchFileNames": ["Dockerfile"],
       "addLabels": ["docker"]
+    },
+    {
+      "matchManagers": ["ansible-galaxy", "pip_requirements", "regex"],
+      "matchPackagePatterns": ["ansible"],
+      "groupName": "ansible",
+      "addLabels": ["ansible"]
     }
   ],
   "pip_requirements": {
-    "addLabels": ["ansible-pip"],
     "managerFilePatterns": ["ansible/pip.requirements.txt"],
   },
   "ansible-galaxy": {
-    "addLabels": ["ansible-galaxy"],
     "managerFilePatterns": ["ansible/ansible-galaxy.deps.yml"],
   },
   "github-actions": {
