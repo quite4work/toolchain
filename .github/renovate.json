@@ -8,11 +8,14 @@
       "matchFileNames": ["Dockerfile"]
     },
     {
-      "addLabels": ["ansible", "python"],
-      "groupName": "ansible-python",
-      "matchDepNames": ["library/python"],
-      "matchManagers": ["ansible-galaxy", "pip_requirements", "regex"],
-      "matchPackageNames": ["ansible"],
+      "addLabels": ["python"],
+      "matchDepNames": ["library/python"]
+    },
+    {
+      "addLabels": ["ansible"],
+      "groupName": "ansible",
+      "matchDepNames": ["ansible", "library/python"],
+      "matchFileNames": ["ansible/pip.requirements.txt", "ansible/ansible-galaxy.deps.yml"]
     }
   ],
   "pip_requirements": {
