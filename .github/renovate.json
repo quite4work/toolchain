@@ -9,7 +9,7 @@
     }
   ],
   "pip_requirements": {
-    "addLabels": ["pip_requirements"],
+    "addLabels": ["ansible-pip"],
     "managerFilePatterns": ["ansible/pip.requirements.txt"],
   },
   "ansible-galaxy": {
@@ -17,7 +17,7 @@
     "managerFilePatterns": ["ansible/ansible-galaxy.deps.yml"],
   },
   "github-actions": {
-    "addLabels": ["github_actions"]
+    "addLabels": ["github-actions"]
   },
   "npm": {
     "addLabels": ["npm"],
