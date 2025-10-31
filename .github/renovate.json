@@ -8,6 +8,9 @@
       "addLabels": ["docker"]
     }
   ],
+  "ansible": {
+    "addLabels": ["ansible"]
+  },
   "github-actions": {
     "addLabels": ["github_actions"]
   },
