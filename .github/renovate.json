@@ -10,8 +10,13 @@
     {
       "addLabels": ["ansible"],
       "groupName": "ansible",
-      "matchPackageNames": ["ansible", "library/python"],
       "matchFileNames": ["ansible/pip.requirements.txt", "ansible/ansible-galaxy.deps.yml"]
+    },
+    {
+      "addLabels": ["ansible"],
+      "groupName": "ansible",
+      "matchPackageNames": ["ansible", "library/python"],
+      "matchFileNames": ["Dockerfile"]
     }
   ],
   "pip_requirements": {
