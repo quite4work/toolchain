@@ -8,10 +8,6 @@
       "matchFileNames": ["Dockerfile"]
     },
     {
-      "addLabels": ["python"],
-      "matchPackageNames": ["library/python"]
-    },
-    {
       "addLabels": ["ansible"],
       "groupName": "ansible",
       "matchPackageNames": ["ansible", "library/python"],
