@@ -169,10 +169,10 @@
     {
       "depNameTemplate": "library/python",
       "datasourceTemplate": "docker",
-      "versioningTemplate": "regex:^(?<major>\\d+\\.\\d+)(?<minor>\\.\\d+)?$",
+      "versioningTemplate": "regex:^(?<major>\\d+\\.\\d+)\\.(?<minor>\\d+)$",
       "customType": "regex",
       "managerFilePatterns": ["Dockerfile"],
-      "matchStrings": ["ARG python_ver=(?<currentValue>.*)"],
+      "matchStrings": ["ARG python_ver=(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "autoReplaceStringTemplate": "ARG python_ver={{newValue}}"
     }
   ]
