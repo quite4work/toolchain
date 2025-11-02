@@ -8,6 +8,10 @@
       "matchFileNames": ["Dockerfile"]
     },
     {
+      "addLabels": ["python"],
+      "matchDepNames": ["library/python"]
+    },
+    {
       "addLabels": ["ansible"],
       "groupName": "ansible",
       "matchFileNames": ["ansible/pip.requirements.txt", "ansible/ansible-galaxy.deps.yml"]
