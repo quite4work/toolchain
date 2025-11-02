@@ -169,7 +169,7 @@
     {
       "depNameTemplate": "library/python",
       "datasourceTemplate": "docker",
-      "versioningTemplate": "python",
+      "versioningTemplate": "semver-coerced",
       "customType": "regex",
       "managerFilePatterns": ["Dockerfile"],
       "matchStrings": ["ARG python_ver=(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
