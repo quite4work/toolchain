@@ -21,7 +21,7 @@ collections:
     version: 4.3.0
   # https://galaxy.ansible.com/ui/repo/published/kubernetes/core
   - name: kubernetes.core
-    version: 5.2.0
+    version: 5.4.1
   # https://galaxy.ansible.com/ui/repo/published/vultr/cloud
   - name: vultr.cloud
     version: 1.13.0
