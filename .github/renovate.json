@@ -13,6 +13,10 @@
       "matchDepNames": ["library/python"]
     },
     {
+      "addLabels": ["k::toolchain"],
+      "matchFileNames": ["biome.json"]
+    },
+    {
       "addLabels": ["ansible"],
       "groupName": "ansible",
       "matchFileNames": ["ansible/pip.requirements.txt", "ansible/ansible-galaxy.deps.yml"]
@@ -31,10 +35,10 @@
     "managerFilePatterns": ["ansible/ansible-galaxy.deps.yml"],
   },
   "github-actions": {
-    "addLabels": ["github-actions"]
+    "addLabels": ["github-actions", "k::toolchain"]
   },
   "npm": {
-    "addLabels": ["npm"],
+    "addLabels": ["npm", "k::toolchain"],
     "rangeStrategy": "replace"
   },
   "customManagers": [
