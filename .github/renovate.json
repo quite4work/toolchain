@@ -4,15 +4,19 @@
   "labels": ["enhancement", "k::dependencies"],
   "packageRules": [
     {
+      "matchFileNames": ["biome.json"],
+      "addLabels": ["k::toolchain"]
+    },
+    {
       "matchFileNames": ["Dockerfile"],
       "addLabels": ["docker"]
     }
   ],
   "github-actions": {
-    "addLabels": ["github_actions"]
+    "addLabels": ["github_actions", "k::toolchain"]
   },
   "npm": {
-    "addLabels": ["npm"],
+    "addLabels": ["npm", "k::toolchain"],
     "rangeStrategy": "replace"
   },
   "customManagers": [
