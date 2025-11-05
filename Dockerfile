@@ -3,7 +3,7 @@ ARG python_ver=3.13.9
 FROM python:${python_ver}-slim-trixie
 
 ARG image_ver=1.3.0
-ARG ansible_ver=12.1.0
+ARG ansible_ver=11.11.0
 ARG biome_ver=2.3.3
 ARG butane_ver=0.25.1
 ARG deno_ver=2.5.6
