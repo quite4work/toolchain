@@ -155,6 +155,7 @@ All user visible changes to this project will be documented in this file. This p
 [Ansible]: https://redhat.com/ansible-collaborative
 [Biome]: https://biomejs.dev
 [Butane]: https://coreos.github.io/butane
+[Debian Linux]: https://www.debian.org
 [Deno]: https://deno.com
 [DigitalOcean CLI]: https://docs.digitalocean.com/reference/doctl
 [Hetzner Cloud CLI]: https://github.com/hetznercloud/cli
