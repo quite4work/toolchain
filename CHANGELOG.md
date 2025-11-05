@@ -6,6 +6,17 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
+## main
+
+[Diff](/../../compare/1.2.4...main)
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251103 (13.1): <https://github.com/docker-library/official-images/commit/ec96e91daf2f3252635a137f45dde5b84755e0b4>
+
+
+
+
 ## [1.2.4] · 2025-11-03
 [1.2.4]: /../../tree/1.2.4
 
@@ -127,6 +138,7 @@ All user visible changes to this project will be documented in this file. This p
 [Ansible]: https://redhat.com/ansible-collaborative
 [Biome]: https://biomejs.dev
 [Butane]: https://coreos.github.io/butane
+[Debian Linux]: https://www.debian.org
 [Deno]: https://deno.com
 [DigitalOcean CLI]: https://docs.digitalocean.com/reference/doctl
 [Hetzner Cloud CLI]: https://github.com/hetznercloud/cli
