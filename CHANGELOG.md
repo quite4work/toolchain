@@ -9,11 +9,27 @@ All user visible changes to this project will be documented in this file. This p
 ## [1.3.0] · 2025-11-??
 [1.3.0]: /../../tree/1.3.0
 
-[Diff](/../../compare/1.2.3...1.3.0)
+[Diff](/../../compare/1.2.5...1.3.0)
 
 ### Created
 
 - [Vim] to use as a default editor inside toolchain container
+
+
+
+
+## [1.2.5] · 2025-11-05
+[1.2.5]: /../../tree/1.2.5
+
+[Diff](/../../compare/1.2.4...1.2.5)
+
+### Upgraded
+
+- [Terraform] 1.13.5: <https://github.com/hashicorp/terraform/releases/tag/v1.13.5>
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251103 (13.1): <https://github.com/docker-library/official-images/commit/ec96e91daf2f3252635a137f45dde5b84755e0b4>
 
 
 
