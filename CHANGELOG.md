@@ -6,14 +6,62 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.3.0] · 2025-11-??
-[1.3.0]: /../../tree/1.3.0
+## [1.5.0] · 2025-11-??
+[1.5.0]: /../../tree/1.5.0
 
-[Diff](/../../compare/1.2.5...1.3.0)
+[Diff](/../../compare/1.4.1...1.5.0)
 
 ### Created
 
 - [Vim] to use as a default editor inside toolchain container
+
+
+
+
+## [1.4.1] · 2025-11-11
+[1.4.1]: /../../tree/1.4.1
+
+[Diff](/../../compare/1.4.0...1.4.1)
+
+### Upgraded
+
+- [Helm] 3.19.1: <https://github.com/helm/helm/releases/tag/v3.19.1>
+
+
+
+
+## [1.4.0] · 2025-11-10
+[1.4.0]: /../../tree/1.4.0
+
+[Diff](/../../compare/1.3.0...1.4.0)
+
+### Upgraded
+
+- [Hetzner Cloud CLI] 1.57.0: <https://github.com/hetznercloud/cli/releases/tag/v1.57.0>
+
+
+
+
+## [1.3.0] · 2025-11-07
+[1.3.0]: /../../tree/1.3.0
+
+[Diff](/../../compare/1.2.6...1.3.0)
+
+### Upgraded
+
+- [DigitalOcean CLI] 1.147.0: <https://github.com/digitalocean/doctl/releases/tag/v1.147.0>
+
+
+
+
+## [1.2.6] · 2025-11-06
+[1.2.6]: /../../tree/1.2.6
+
+[Diff](/../../compare/1.2.5...1.2.6)
+
+### Upgraded
+
+- [Biome] 2.3.4: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.4>
 
 
 
