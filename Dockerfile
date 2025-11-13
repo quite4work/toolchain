@@ -21,6 +21,9 @@ ENV TOOLCHAIN=1
 # Set Vim as the default editor explicitly.
 ENV EDITOR=vim
 
+# Disable checking if a newer Deno version is available.
+ENV DENO_NO_UPDATE_CHECK=1
+
 # Prepare project directory.
 RUN mkdir -p /app/
 WORKDIR /app/
