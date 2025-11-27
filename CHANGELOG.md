@@ -6,14 +6,103 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [1.5.0] · 2025-11-??
-[1.5.0]: /../../tree/1.5.0
+## [2.2.0] · 2025-11-??
+[2.2.0]: /../../tree/2.2.0
 
-[Diff](/../../compare/1.4.1...1.5.0)
+[Diff](/../../compare/2.1.2...2.2.0)
 
 ### Created
 
 - [Vim] to use as a default editor inside toolchain container
+
+
+
+
+## [2.1.2] · 2025-11-25
+[2.1.2]: /../../tree/2.1.2
+
+[Diff](/../../compare/2.1.1...2.1.2)
+
+### Upgraded
+
+- [Helm] 4.0.1: <https://github.com/helm/helm/releases/tag/v4.0.1>
+
+
+
+
+## [2.1.1] · 2025-11-21
+[2.1.1]: /../../tree/2.1.1
+
+[Diff](/../../compare/2.1.0...2.1.1)
+
+### Upgraded
+
+- [Biome] 2.3.7: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.7>
+
+
+
+
+## [2.1.0] · 2025-11-19
+[2.1.0]: /../../tree/2.1.0
+
+[Diff](/../../compare/2.0.1...2.1.0)
+
+### Upgraded
+
+- [Terraform] 1.14.0: <https://github.com/hashicorp/terraform/releases/tag/v1.14.0>
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251117 (13.2): <https://github.com/docker-library/official-images/commit/215fa7075010e3f2da20008b1a3a223b788beb0d>
+
+
+
+
+## [2.0.1] · 2025-11-17
+[2.0.1]: /../../tree/2.0.1
+
+[Diff](/../../compare/2.0.0...2.0.1)
+
+### Upgraded
+
+- [Biome] 2.3.6: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.6>
+
+
+
+
+## [2.0.0] · 2025-11-13
+[2.0.0]: /../../tree/2.0.0
+
+[Diff](/../../compare/1.4.3...2.0.0)
+
+### Upgraded
+
+- [Helm] 4.0.0: <https://github.com/helm/helm/releases/tag/v4.0.0>
+
+
+
+
+## [1.4.3] · 2025-11-13
+[1.4.3]: /../../tree/1.4.3
+
+[Diff](/../../compare/1.4.2...1.4.3)
+
+### Upgraded
+
+- [Helm] 3.19.2: <https://github.com/helm/helm/releases/tag/v3.19.2>
+
+
+
+
+## [1.4.2] · 2025-11-12
+[1.4.2]: /../../tree/1.4.2
+
+[Diff](/../../compare/1.4.1...1.4.2)
+
+### Upgraded
+
+- [Biome] 2.3.5: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.5>
+- [Kubernetes CLI] 1.34.2: <https://github.com/kubernetes/kubernetes/blob/4b20e5c3fe37533984fbf60bc1acfa01380a2bb0/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1341>
 
 
 

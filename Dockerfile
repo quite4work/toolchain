@@ -2,18 +2,18 @@ ARG python_ver=3.13.9
 # https://hub.docker.com/_/python/
 FROM python:${python_ver}-slim-trixie
 
-ARG image_ver=1.5.0
+ARG image_ver=2.2.0
 ARG ansible_ver=11.11.0
 ARG biome_ver=2.3.4
 ARG butane_ver=0.25.1
 ARG deno_ver=2.5.6
 ARG doctl_ver=1.147.0
 ARG hcloud_ver=1.57.0
-ARG helm_ver=3.19.1
+ARG helm_ver=4.0.1
 ARG jsonnet_ver=0.21.0
 ARG jsonnet_bundler_ver=0.6.0
-ARG kubectl_ver=1.34.1
-ARG terraform_ver=1.13.5
+ARG kubectl_ver=1.34.2
+ARG terraform_ver=1.14.0
 
 # Indication that the current context is inside this toolchain container.
 ENV TOOLCHAIN=1
