@@ -6,14 +6,38 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [2.2.0] · 2025-11-??
+## [2.2.0] · 2025-12-??
 [2.2.0]: /../../tree/2.2.0
 
-[Diff](/../../compare/2.1.2...2.2.0)
+[Diff](/../../compare/2.1.4...2.2.0)
 
 ### Created
 
 - [Vim] to use as a default editor inside toolchain container
+
+
+
+
+## [2.1.4] · 2025-12-03
+[2.1.4]: /../../tree/2.1.4
+
+[Diff](/../../compare/2.1.3...2.1.4)
+
+### Upgraded
+
+- [Terraform] 1.14.1: <https://github.com/hashicorp/terraform/releases/tag/v1.14.1>
+
+
+
+
+## [2.1.3] · 2025-11-27
+[2.1.3]: /../../tree/2.1.3
+
+[Diff](/../../compare/2.1.2...2.1.3)
+
+### Upgraded
+
+- [Biome] 2.3.8: <https://github.com/biomejs/biome/releases/tag/%40biomejs%2Fbiome%402.3.8>
 
 
 
