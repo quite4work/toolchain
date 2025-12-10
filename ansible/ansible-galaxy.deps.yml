@@ -3,7 +3,7 @@
 roles:
   - name: instrumentisto.coreos-bootstrap
     src: git+https://github.com/instrumentisto/ansible-coreos-bootstrap
-    version: pypy-7.3.20
+    version: 4.0.1
 
 # Check minimal Ansible version requirements before upgrading collections.
 collections:
