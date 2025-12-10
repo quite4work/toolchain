@@ -22,6 +22,8 @@ All user visible changes to this project will be documented in this file. This p
 ### Upgraded
 
 - Uprade and use fixed versions in `pip.requirements.txt`
+- [Ansible] roles:
+    - [`instrumentisto.coreos-bootstrap`] 4.0.1: <https://github.com/instrumentisto/ansible-coreos-bootstrap/blob/main/CHANGELOG.md#401--2025-12-10>
 - [Ansible] collections:
     - [`community.general`] 11.4.1: <https://github.com/ansible-collections/community.general/blob/11.4.1/CHANGELOG.md#v11-4-1>
     - [`containers.podman`] 1.18.0: <https://github.com/containers/ansible-podman-collections/blob/1.18.0/CHANGELOG.rst#v1-18-0>
@@ -325,7 +327,7 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-
+[`instrumentisto.coreos-bootstrap`]: https://github.com/instrumentisto/ansible-coreos-bootstrap
 [`community.digitalocean`]: https://galaxy.ansible.com/ui/repo/published/community/digitalocean
 [`community.general`]: https://galaxy.ansible.com/ui/repo/published/community/general
 [`containers.podman`]: https://galaxy.ansible.com/ui/repo/published/containers/podman
