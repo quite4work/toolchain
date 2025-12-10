@@ -11,12 +11,22 @@ All user visible changes to this project will be documented in this file. This p
 
 [Diff](/../../compare/2.1.4...2.2.0)
 
-### Created
+### Added
 
 - [Vim] to use as a default editor inside toolchain container
 
+### Changed
+
+- Disable checking if a newer Deno version is available.
+
 ### Upgraded
 
+- Uprade and use fixed versions in `pip.requirements.txt`
+- [Ansible] collections:
+    - [`community.general`] 11.4.1: <https://github.com/ansible-collections/community.general/blob/11.4.1/CHANGELOG.md#v11-4-1>
+    - [`containers.podman`] 1.18.0: <https://github.com/containers/ansible-podman-collections/blob/1.18.0/CHANGELOG.rst#v1-18-0>
+    - [`hetzner.hcloud`] 6.0.0: <https://github.com/ansible-collections/hetzner.hcloud/releases/tag/6.0.0>
+    - [`kubernetes.core`] 6.2.0: <https://github.com/ansible-collections/kubernetes.core/blob/6.2.0/CHANGELOG.rst#v6-2-0>
 - [DigitalOcean CLI] 1.148.0: <https://github.com/digitalocean/doctl/releases/tag/v1.148.0>
 - [Kubernetes CLI] 1.34.3: <https://github.com/kubernetes/kubernetes/blob/f887a29fe220c1013ae09699bb301040beb5c86e/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1342>
 
