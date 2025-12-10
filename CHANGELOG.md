@@ -18,10 +18,17 @@ All user visible changes to this project will be documented in this file. This p
 ### Changed
 
 - Disable checking if a newer Deno version is available.
+- Use fixed versions for [pip] packages.
 
 ### Upgraded
 
 - Uprade and use fixed versions in `pip.requirements.txt`
+- [pip] packages:
+    - [`jmespath`] 1.0.1: <https://github.com/jmespath/jmespath.py/blob/develop/CHANGELOG.rst#101>
+    - [`hcloud`] 2.9.0: <https://github.com/hetznercloud/hcloud-python/blob/main/CHANGELOG.md#v290>
+    - [`kubernetes-validate`] 1.34.1: <https://github.com/willthames/kubernetes-validate/releases>
+    - [`kubernetes`] 34.1.0: <https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md#v3410b1>
+    - [`netaddr`] 1.3.0: <https://netaddr.readthedocs.io/en/latest/changes.html#release-1-3-0>
 - [Ansible] roles:
     - [`instrumentisto.coreos-bootstrap`] 4.0.1: <https://github.com/instrumentisto/ansible-coreos-bootstrap/blob/main/CHANGELOG.md#401--2025-12-10>
 - [Ansible] collections:
@@ -322,7 +329,7 @@ All user visible changes to this project will be documented in this file. This p
 - [Jsonnet Bundler] 0.6.0: <https://github.com/jsonnet-bundler/jsonnet-bundler/releases/tag/v0.6.0>
 - [Kubernetes CLI] 1.34.1: <https://github.com/kubernetes/kubernetes/blob/70af7708fcc585a717f9208f83a4351585440bab/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1340>
 - [Python] 3.13.7: <https://docs.python.org/3.13/whatsnew/changelog.html#python-3-13-7-final>
-- [pip] packages: `jmespath`, `hcloud`, `kubernetes-validate`, `kubernetes`, `netaddr`
+- [pip] packages: [`jmespath`], [`hcloud`], [`kubernetes-validate`], [`kubernetes`], [`netaddr`]
 - [Terraform] 1.13.3: <https://github.com/hashicorp/terraform/releases/tag/v1.13.3>
 
 
@@ -334,6 +341,11 @@ All user visible changes to this project will be documented in this file. This p
 [`hetzner.hcloud`]: https://galaxy.ansible.com/ui/repo/published/hetzner/hcloud
 [`kubernetes.core`]: https://galaxy.ansible.com/ui/repo/published/kubernetes/core
 [`vultr.cloud`]: https://galaxy.ansible.com/ui/repo/published/vultr/cloud
+[`hcloud`]: https://pypi.org/project/hcloud
+[`jmespath`]: https://pypi.org/project/jmespath
+[`kubernetes-validate`]: https://pypi.org/project/kubernetes-validate
+[`kubernetes`]: https://pypi.org/project/kubernetes
+[`netaddr`]: https://pypi.org/project/netaddr
 [Ansible]: https://redhat.com/ansible-collaborative
 [Biome]: https://biomejs.dev
 [Butane]: https://coreos.github.io/butane
