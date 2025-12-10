@@ -6,10 +6,10 @@ All user visible changes to this project will be documented in this file. This p
 
 
 
-## [2.2.0] · 2025-12-10
-[2.2.0]: /../../tree/2.2.0
+## [3.0.0] · 2025-12-10
+[3.0.0]: /../../tree/3.0.0
 
-[Diff](/../../compare/2.1.4...2.2.0)
+[Diff](/../../compare/2.1.4...3.0.0)
 
 ### Added
 
@@ -22,13 +22,8 @@ All user visible changes to this project will be documented in this file. This p
 
 ### Upgraded
 
-- Uprade and use fixed versions in `pip.requirements.txt`
-- [pip] packages:
-    - [`jmespath`] 1.0.1: <https://github.com/jmespath/jmespath.py/blob/develop/CHANGELOG.rst#101>
-    - [`hcloud`] 2.9.0: <https://github.com/hetznercloud/hcloud-python/blob/main/CHANGELOG.md#v290>
-    - [`kubernetes-validate`] 1.34.1: <https://github.com/willthames/kubernetes-validate/releases/tag/v1.34.1>
-    - [`kubernetes`] 34.1.0: <https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md#v3410b1>
-    - [`netaddr`] 1.3.0: <https://netaddr.readthedocs.io/en/latest/changes.html#release-1-3-0>
+- [Python] 3.13.11: <https://docs.python.org/3.13/whatsnew/changelog.html#python-3-13-11-final>
+- [Ansible] 11.12.0: <https://github.com/ansible-community/ansible-build-data/blob/11.12.0/11/CHANGELOG-v11.md#release-summary>
 - [Ansible] roles:
     - [`instrumentisto.coreos-bootstrap`] 4.0.1: <https://github.com/instrumentisto/ansible-coreos-bootstrap/blob/main/CHANGELOG.md#401--2025-12-10>
 - [Ansible] collections:
@@ -36,6 +31,12 @@ All user visible changes to this project will be documented in this file. This p
     - [`containers.podman`] 1.18.0: <https://github.com/containers/ansible-podman-collections/blob/1.18.0/CHANGELOG.rst#v1-18-0>
     - [`hetzner.hcloud`] 6.0.0: <https://github.com/ansible-collections/hetzner.hcloud/releases/tag/6.0.0>
     - [`kubernetes.core`] 6.2.0: <https://github.com/ansible-collections/kubernetes.core/blob/6.2.0/CHANGELOG.rst#v6-2-0>
+- [pip] packages:
+    - [`jmespath`] 1.0.1: <https://github.com/jmespath/jmespath.py/blob/develop/CHANGELOG.rst#101>
+    - [`hcloud`] 2.9.0: <https://github.com/hetznercloud/hcloud-python/blob/main/CHANGELOG.md#v290>
+    - [`kubernetes-validate`] 1.34.1: <https://github.com/willthames/kubernetes-validate/releases/tag/v1.34.1>
+    - [`kubernetes`] 34.1.0: <https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md#v3410b1>
+    - [`netaddr`] 1.3.0: <https://netaddr.readthedocs.io/en/latest/changes.html#release-1-3-0>
 - [DigitalOcean CLI] 1.148.0: <https://github.com/digitalocean/doctl/releases/tag/v1.148.0>
 - [Kubernetes CLI] 1.34.3: <https://github.com/kubernetes/kubernetes/blob/f887a29fe220c1013ae09699bb301040beb5c86e/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1342>
 
