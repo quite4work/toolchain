@@ -26,7 +26,7 @@ All user visible changes to this project will be documented in this file. This p
 - [pip] packages:
     - [`jmespath`] 1.0.1: <https://github.com/jmespath/jmespath.py/blob/develop/CHANGELOG.rst#101>
     - [`hcloud`] 2.9.0: <https://github.com/hetznercloud/hcloud-python/blob/main/CHANGELOG.md#v290>
-    - [`kubernetes-validate`] 1.34.1: <https://github.com/willthames/kubernetes-validate/releases>
+    - [`kubernetes-validate`] 1.34.1: <https://github.com/willthames/kubernetes-validate/releases/tag/v1.34.1>
     - [`kubernetes`] 34.1.0: <https://github.com/kubernetes-client/python/blob/master/CHANGELOG.md#v3410b1>
     - [`netaddr`] 1.3.0: <https://netaddr.readthedocs.io/en/latest/changes.html#release-1-3-0>
 - [Ansible] roles:
