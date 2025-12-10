@@ -35,7 +35,7 @@
     "managerFilePatterns": ["ansible/ansible-galaxy.deps.yml"],
   },
   "github-actions": {
-    "addLabels": ["github-actions", "k::toolchain"]
+    "addLabels": ["github_actions", "k::toolchain"]
   },
   "npm": {
     "addLabels": ["npm", "k::toolchain"],
