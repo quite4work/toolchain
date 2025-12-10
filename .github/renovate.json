@@ -19,7 +19,10 @@
     {
       "addLabels": ["ansible"],
       "groupName": "ansible",
-      "matchFileNames": ["ansible/pip.requirements.txt", "ansible/ansible-galaxy.deps.yml"]
+      "matchFileNames": [
+        "ansible/pip.requirements.txt",
+        "ansible/ansible-galaxy.deps.yml"
+      ]
     },
     {
       "addLabels": ["ansible"],
