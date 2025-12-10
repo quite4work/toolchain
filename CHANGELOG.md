@@ -15,6 +15,15 @@ All user visible changes to this project will be documented in this file. This p
 
 - [Vim] to use as a default editor inside toolchain container
 
+### Upgraded
+
+- [DigitalOcean CLI] 1.148.0: <https://github.com/digitalocean/doctl/releases/tag/v1.148.0>
+- [Kubernetes CLI] 1.34.3: <https://github.com/kubernetes/kubernetes/blob/f887a29fe220c1013ae09699bb301040beb5c86e/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1342>
+
+### Security updated
+
+- [Debian Linux] "trixie" 20251208 (13.2): <https://github.com/docker-library/official-images/commit/11670f6c414419f5eb6febb8a94978354073a016>
+
 
 
 
