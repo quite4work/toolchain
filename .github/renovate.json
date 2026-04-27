@@ -17,6 +17,10 @@
       "matchFileNames": ["biome.json"]
     },
     {
+      "groupName": "dependencies",
+      "matchManagers": ["!github-actions"]
+    },
+    {
       "addLabels": ["ansible"],
       "groupName": "ansible",
       "matchFileNames": [
@@ -29,10 +33,6 @@
       "groupName": "ansible",
       "matchPackageNames": ["ansible", "library/python"],
       "matchFileNames": ["Dockerfile"]
-    },
-    {
-      "groupName": "dependencies",
-      "matchManagers": ["!github-actions"]
     }
   ],
   "pip_requirements": {
