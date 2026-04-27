@@ -29,6 +29,10 @@
       "groupName": "ansible",
       "matchPackageNames": ["ansible", "library/python"],
       "matchFileNames": ["Dockerfile"]
+    },
+    {
+      "groupName": "dependencies",
+      "matchManagers": ["!github-actions"]
     }
   ],
   "pip_requirements": {
